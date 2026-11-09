@@ -1,0 +1,5 @@
+﻿$(document).ready(function () {
+    if ($('.main-content *:first-child').hasClass('ws-cover-image')) {
+        $('#divHeader').addClass('has-cover');
+    }
+});

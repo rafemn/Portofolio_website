@@ -1,0 +1,435 @@
+﻿(function () {
+    "use strict";
+
+    if (!window.lfAnalyticsContext) {
+        return;
+    }
+
+    function safe(fn) {
+        try {
+            return fn();
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function safeAsync(fn) {
+        return function () {
+            try {
+                return fn.apply(this, arguments);
+            } catch (e) {
+                return null;
+            }
+        };
+    }
+
+    safe(function () {
+        var ctx = window.lfAnalyticsContext || {};
+        //console.log('ctx', ctx);
+        var pageViewsGuid = null;
+        var startFailed = false;
+        var eventQueue = [];
+        var maxQueueLength = 20;
+        var endpointStart = ctx.EndpointStart;
+        var endpointAction = "/PublicServices.asmx/PageActions_Save";
+
+        // ThumbmarkJS open-source UMD build
+        var thumbmarkCdnUrl = ctx.FingerprintCdnUrl || "/assets/js/thumbmark.js";
+
+        // BotD open-source build, overridable via context if you self-host.
+        var botdCdnUrl = ctx.BotdCdnUrl || "/assets/js/botd.v2.js";
+
+        function safeJsonStringify(obj) {
+            try {
+                return JSON.stringify(obj);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function safeVisibilityState() {
+            return safe(function () {
+                return document.visibilityState || null;
+            });
+        }
+
+        function queueOrSend(actionType, data) {
+            safe(function () {
+                var evt = {
+                    actionType: actionType,
+                    data: data || {},
+                    clientCreated: new Date().toISOString(),
+                    clientOffset: performance.now()
+                };
+
+                if (pageViewsGuid) {
+                    sendEvent(evt);
+                    return;
+                }
+
+                if (!startFailed && eventQueue.length < maxQueueLength) {
+                    eventQueue.push(evt);
+                }
+            });
+        }
+
+        function sendWithXhr(url, payload) {
+            safe(function () {
+                if (!window.XMLHttpRequest) return;
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", url, true);
+                xhr.withCredentials = true;
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(payload);
+            });
+        }
+
+        function sendPost(url, payload, preferBeacon) {
+            safe(function () {
+                if (!payload) return;
+
+                //nsole.log('sendPost', payload);
+
+                if (preferBeacon && navigator && typeof navigator.sendBeacon === "function") {
+                    var beaconSent = false;
+
+                    safe(function () {
+                        var blob = new Blob([payload], { type: "application/json" });
+                        beaconSent = navigator.sendBeacon(url, blob);
+                    });
+
+                    if (beaconSent) return;
+                }
+
+                if (window.fetch) {
+                    safe(function () {
+                        fetch(url, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            credentials: "include",
+                            keepalive: true,
+                            body: payload
+                        }).catch(function () { });
+                    });
+                } else {
+                    sendWithXhr(url, payload);
+                }
+            });
+        }
+
+        function sendEvent(evt) {
+            safe(function () {
+                if (!pageViewsGuid || !evt) return;
+
+                var payload = safeJsonStringify({
+                    pageViewsGuid: pageViewsGuid,
+                    action: evt.actionType,
+                    clientCreated: evt.clientCreated,
+                    clientOffset: evt.clientOffset,
+                    token: ctx.Token
+                    //data: evt.data || {}
+                });
+
+                sendPost(endpointAction, payload, true);
+            });
+        }
+
+        function flushQueue() {
+            safe(function () {
+                var queued = eventQueue.slice(0);
+                eventQueue.length = 0;
+
+                for (var i = 0; i < queued.length; i++) {
+                    sendEvent(queued[i]);
+                }
+            });
+        }
+
+        function startPageView() {
+            safe(function () {
+                //var ctx = window.lfAnalyticsContext || {};
+
+                var payloadObj = {
+                    data: {
+                        sourceType: ctx.sourceType,
+                        accountsGuid: ctx.AccountsGuid || null,
+                        webSitesGuid: ctx.WebSitesGuid || null,
+                        webPagesGuid: ctx.WebPagesGuid || null,
+                        collectionsGuid: ctx.CollectionsGuid || null,
+                        foldersGuid: ctx.FoldersGuid || null,
+                        eventsGuid: ctx.EventsGuid || null,
+                        sessionsGuid: ctx.SessionsGuid || null,
+                        bioSitesGuid: ctx.BookingSitesGuid || null,
+
+                        urlPath: safe(function () { return location.href; }),
+                        referrer: safe(function () { return document.referrer || null; }),
+                        title: safe(function () { return document.title || null; }),
+                        viewportWidth: safe(function () { return window.innerWidth || null; }),
+                        viewportHeight: safe(function () { return window.innerHeight || null; }),
+                        timezoneOffset: safe(function () { return new Date().getTimezoneOffset(); }),
+                        visibilityState: safeVisibilityState(),
+                        token: ctx.Token
+                    }
+                };
+
+                var payload = safeJsonStringify(payloadObj);
+                if (!payload) {
+                    startFailed = true;
+                    eventQueue.length = 0;
+                    return;
+                }
+
+                if (!window.fetch) {
+                    startFailed = true;
+                    eventQueue.length = 0;
+                    sendWithXhr(endpointStart, payload);
+                    return;
+                }
+
+                fetch(endpointStart, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    keepalive: true,
+                    body: payload
+                })
+                    .then(function (r) {
+                        if (!r || !r.ok) return null;
+                        return r.json().catch(function () { return null; });
+                    })
+                    .then(function (data) {
+                        pageViewsGuid = getPageViewGuidFromResponse(data);
+
+                        //console.log('pageViewsGuid', pageViewsGuid);
+
+                        if (!pageViewsGuid) {
+                            startFailed = true;
+                            eventQueue.length = 0;
+                            return;
+                        }
+
+                        window.__lfPageViewGuid = pageViewsGuid;
+                        flushQueue();
+                    })
+                    .catch(function () {
+                        startFailed = true;
+                        eventQueue.length = 0;
+                    });
+            });
+        }
+
+        function getPageViewGuidFromResponse(data) {
+            var result = data;
+
+            if (result && typeof result.d !== "undefined") {
+                result = result.d;
+            }
+
+            // Some ASMX setups return d as a JSON string.
+            if (typeof result === "string") {
+                try {
+                    result = JSON.parse(result);
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            if (!result) return null;
+
+            if (typeof result === "string") {
+                return result;
+            }
+
+            return result.pageViewsGuid || result.PageViewsGuid || null;
+        }
+
+        function addSafeEventListener(target, eventName, handler) {
+            safe(function () {
+                if (!target || !target.addEventListener) return;
+
+                var wrapped = safeAsync(handler);
+
+                try {
+                    target.addEventListener(eventName, wrapped, { passive: true });
+                } catch (e) {
+                    try {
+                        target.addEventListener(eventName, wrapped, false);
+                    } catch (ignore) { }
+                }
+            });
+        }
+
+        function loadThumbmark() {
+            safe(function () {
+                // Dynamic import + Promises are required. Bail quietly on old engines.
+                if (typeof Promise === "undefined") return;
+
+                // Wrapping import() in a Function keeps the syntax from being parsed
+                // (and throwing) on engines that don't support dynamic import, matching
+                // the defensive style used elsewhere in this script.
+                var dynamicImport;
+                try {
+                    dynamicImport = new Function("u", "return import(u);");
+                } catch (e) {
+                    return;
+                }
+
+                dynamicImport(thumbmarkCdnUrl)
+                    .then(function (mod) {
+                        // ThumbmarkJS 1.x exposes a `Thumbmark` constructor; resolve it
+                        // across ESM/UMD shapes, then run get() for the result object.
+                        var Ctor = resolveThumbmark(mod);
+                        if (typeof Ctor !== "function") return null;
+
+                        var tm = new Ctor();
+                        if (!tm || typeof tm.get !== "function") return null;
+                        return tm.get();
+                    })
+                    .then(function (result) {
+                        if (!result) return;
+
+                        // get() resolves to an object. Prefer the API-backed visitorId
+                        // when present (only with an API key), otherwise the client-side
+                        // thumbmark.
+                        var id = result.visitorId || result.thumbmark;
+                        if (!id) return;
+
+                        // Action name format is unchanged: "fp-" + identifier.
+                        // e.g. action = "fp-00c8328e409c4831e4aba4f65ec3a0c1"
+                        queueOrSend("fp-" + id);
+                    })
+                    .catch(function () { });
+            });
+        }
+
+        function loadBotd() {
+            safe(function () {
+                if (typeof Promise === "undefined") return;
+
+                var dynamicImport;
+                try {
+                    dynamicImport = new Function("u", "return import(u);");
+                } catch (e) {
+                    return;
+                }
+
+                dynamicImport(botdCdnUrl)
+                    .then(function (mod) {
+                        var lib = resolveLib(mod);
+                        if (!lib || typeof lib.load !== "function") return null;
+                        return lib.load();
+                    })
+                    .then(function (botd) {
+                        if (!botd || typeof botd.detect !== "function") return null;
+                        return botd.detect();
+                    })
+                    .then(function (result) {
+                        if (!result) return;
+
+                        // Encode the verdict into the action name; no data payload.
+                        // Bot:    "bd-bot-headless_chrome", "bd-bot-selenium", "bd-bot-unknown", ...
+                        // Human:  "bd-human"
+                        var action = result.bot
+                            ? ("bd-bot-" + (result.botKind || "unknown"))
+                            : "bd-human";
+
+                        queueOrSend(action);
+                    })
+                    .catch(function () { });
+            });
+        }
+
+        // BotD CDN module exposes its entry point either directly on the module
+        // namespace or under a `default` export; pick whichever actually has load().
+        function resolveLib(mod) {
+            if (!mod) return null;
+            if (typeof mod.load === "function") return mod;
+            if (mod.default && typeof mod.default.load === "function") return mod.default;
+            return mod;
+        }
+
+        // ThumbmarkJS 1.x: locate the `Thumbmark` constructor. The ESM build exposes
+        // it as a named export; some bundles nest it under `default`; the UMD build
+        // attaches it to the global `ThumbmarkJS` namespace as a side effect of import.
+        function resolveThumbmark(mod) {
+            if (mod) {
+                if (typeof mod.Thumbmark === "function") return mod.Thumbmark;
+                if (mod.default && typeof mod.default.Thumbmark === "function") return mod.default.Thumbmark;
+                if (typeof mod.default === "function") return mod.default;
+            }
+            if (typeof window !== "undefined" && window.ThumbmarkJS &&
+                typeof window.ThumbmarkJS.Thumbmark === "function") {
+                return window.ThumbmarkJS.Thumbmark;
+            }
+            return null;
+        }
+
+        function wireEvents() {
+            safe(function () {
+                var sentFirstInteraction = false;
+                var sentScroll10 = false;
+                var sentScroll50 = false;
+
+                function markInteraction() {
+                    if (sentFirstInteraction) return;
+                    sentFirstInteraction = true;
+                    queueOrSend("interaction");
+                }
+
+                function checkScroll() {
+                    var doc = document.documentElement;
+                    var body = document.body;
+
+                    if (!doc || !body) return;
+
+                    var scrollTop = window.pageYOffset || doc.scrollTop || body.scrollTop || 0;
+
+                    var scrollHeight = Math.max(
+                        body.scrollHeight || 0,
+                        doc.scrollHeight || 0,
+                        body.offsetHeight || 0,
+                        doc.offsetHeight || 0
+                    );
+
+                    var clientHeight = window.innerHeight || doc.clientHeight || 0;
+
+                    if (!scrollHeight || !clientHeight || scrollHeight <= clientHeight) return;
+
+                    var pct = Math.round(((scrollTop + clientHeight) / scrollHeight) * 100);
+
+                    if (!sentScroll10 && pct >= 10) {
+                        sentScroll10 = true;
+                        queueOrSend("scroll10", { scrollDepthPercent: pct });
+                    }
+
+                    if (!sentScroll50 && pct >= 50) {
+                        sentScroll50 = true;
+                        queueOrSend("scroll50", { scrollDepthPercent: pct });
+                    }
+                }
+
+                addSafeEventListener(window, "click", markInteraction);
+                addSafeEventListener(window, "touchstart", markInteraction);
+                addSafeEventListener(window, "keydown", markInteraction);
+                addSafeEventListener(window, "scroll", function () {
+                    markInteraction();
+                    checkScroll();
+                });
+
+                safe(function () {
+                    setTimeout(safeAsync(function () {
+                        if (safeVisibilityState() === "visible") {
+                            queueOrSend("dwell3", { dwellMilliseconds: 3000 });
+                        }
+                    }), 3000);
+                });
+            });
+        }
+
+        wireEvents();
+        loadThumbmark();
+        loadBotd();
+        startPageView();
+    });
+})();

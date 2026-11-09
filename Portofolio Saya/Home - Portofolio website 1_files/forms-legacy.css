@@ -1,0 +1,16 @@
+﻿
+.mxb-form-title { font-weight: bold; font-size: 40px; }
+.mxb-fields > li[data-type="127"] .label { font-size: 22px; font-weight: bold; }
+.mxb-fields > li[data-type="127"] h1.label,.mxb-fields > li[data-type="127"] h2.label { font-size: 32px; color: #333; font-weight: bold;}
+.mxb-fields .sublabel { font-size: 12px; }
+
+.mxb-fields .option label {font-size: 14px;}
+.mxb-fields select {
+    font-size: 16px;
+}
+.mxb-button {
+    font-size: 16px;
+}
+.mxb-save-for-later button {
+    font-size: 16px;
+}

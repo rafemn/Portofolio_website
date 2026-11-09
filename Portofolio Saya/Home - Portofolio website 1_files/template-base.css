@@ -1,0 +1,1269 @@
+﻿ul,ol { padding-left: 0; /*bs override*/ }
+.scrollbar-track-x { display: none !important; }
+.fr-placeholder { display:none !important; }
+.fr-line-breaker { display: none !important; }
+
+.website-header { z-index: 9; position: relative; margin: 0 auto; }
+.website-header-container { /*pointer-events: none;*/ margin: 0 auto; padding-left: 4vw; padding-right: 4vw; }
+.website-header a { pointer-events: all; }
+.website-header .company-name a {  display: inline-block;  text-align: center;  padding: 5px 8px; text-decoration: none; }
+.header-has-logo .website-header .company-name a { padding: 0;  }
+.website-header .company-name a:hover { text-decoration: none;}
+
+.website-header .menu-items { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; margin-bottom: 0; }
+.website-header .menu-items > li { flex: 0 0 auto;  padding: 2px 18px; position: relative; }
+.header-bold .website-header .menu-items > li { /*font-weight: bold;*/}
+.website-header .menu-items > li .fa-chevron-down { margin-left: -5px; opacity: .7; pointer-events: all;}
+.website-header .menu-items li > a { display: inline-block; line-height: normal !important; /*for underline hover*/}
+.website-header .social-media { display: flex; align-items: center; margin-bottom: 0; }
+.website-header .menu-items li::after { line-height: inherit; position: absolute; right: -.2rem; top: .2rem; opacity: .4;}
+.separator-pipe .website-header .menu-items > li::after { content: "|";   }
+.separator-dot .website-header .menu-items > li::after { content: "•"; top: .2rem; opacity: 1; }
+.header-rainier .menu-items li::after { content: "" !important; }
+.website-header .menu-items > li:last-child::after { content: ""; }
+.header-action-fade .website-header .menu-items li > a:hover { opacity: 0.7; }
+.header-action-underline .website-header .menu-items > li > a:before { content: ""; position: absolute; width: 100%; height: 2px; bottom: 0; left: 0; background-color: #eee; opacity: .7; visibility: hidden; transform: scaleX(0); transition: all 0.3s ease-in-out;}
+.header-action-underline .website-header .menu-items > li > a:hover:before { visibility: visible; transform: scaleX(1); }
+
+.menu-items li a {display: inline-block; text-decoration: none; position: relative;}
+.menu-items ul { height: 0; overflow: hidden; /*position: absolute; top: 100%; left: 0; z-index: 2; margin-top: -2px;*/ /*text-align: left; */}
+.website-wrapper:not(.header-rainier) .website-header-container .menu-items ul { position: absolute; top: 100%; left: 0; z-index: 2; margin-top: -2px; text-align: left;  }
+.header-rainier .menu-items ul { top: 100%; left: 40px; }
+.menu-items ul li {white-space: nowrap;}
+.menu-items ul li a {padding: 15px 30px; display: block !important; text-shadow: none !important; transition: all 0.3s; }
+.website-wrapper:not(.header-rainier) .website-header-container .menu-items ul li a:hover { text-shadow: none !important; }
+.menu-items li .submenu {  height: 0; overflow: hidden; opacity: 0; transition: all 0.3s ease-out; }
+.website-wrapper:not(.header-rainier) .website-header-container .menu-items li .submenu { box-shadow: 0 0 10px rgba(0,0,0,.1);  }
+.menu-items li .submenu a { padding: 7px 20px !important;   }
+.menu-items li.trigger .submenu { opacity: 1;}
+
+.menu-items li:hover ul{display: block;}
+
+.is-directory-grid { width: 100%; }
+
+.website-header-mobile { display: none; }
+.website-header-mobile a { text-decoration: none; }
+.is-wrapper { min-height: 100vh; }
+
+.cart-body-spinner {position: absolute; top: 0; left: 0; bottom: 0; right: 0; z-index: 999; background: rgba(255,255,255,.9); display: flex; }
+.cart-body-spinner > div {position: absolute; top: 50%; left: 0; right: 0; text-align: center; transform: translateY(-50%); color: #222; font-weight: bold; font-size: 20px; text-transform: uppercase;}
+
+.no-pe { pointer-events: none; }
+.no-pe a { pointer-events: all; }
+
+.force-white h1,.force-white h2,.force-white h3,.force-white h4,.force-white h5,.force-white h6,.force-white p { color: #fff !important; }
+
+@media screen and (max-width: 990px) {
+    body.show-mobile-menu { overflow-y: hidden !important; }
+    .website-header { display: none; }
+    .website-header-mobile { position: fixed; top: 0; left: 0; width: 100%; display: flex; flex-direction: column; /*flex-wrap: wrap; */ z-index: 999;}
+    .website-body { margin-top: 68px;}
+
+    .is-wrapper > .is-section { overflow-y: hidden; overflow-x: hidden; /*height: auto;*/ }
+    .is-wrapper > div.is-section-60 { height: auto; /*min-height: 50vh;*/  }
+    .is-wrapper > div.is-section-70 { height: auto; /*min-height: 50vh;*/ }
+    .is-wrapper > div.is-section-80 { height: auto; min-height: 50vh;  }
+    .is-wrapper > div.is-section-90 { height: auto; min-height: 60vh;  }
+    .is-wrapper > div.is-section-100 { height: auto; min-height: 60vh;      display: flex; flex-wrap: wrap; align-items: center;  }
+    .is-wrapper > div.is-section-20:first-child { min-height: 20vh; height: auto; display: flex; align-items: center;  }
+    .is-wrapper > div.is-section-30:first-child { min-height: 30vh; height: auto; display: flex; align-items: center;  }
+    .is-wrapper > div.is-section-40:first-child { min-height: 40vh; height: auto; display: flex; align-items: center;  }
+    .is-wrapper > div.is-section-50:first-child { min-height: 50vh; height: auto; display: flex; align-items: center;  }
+    .is-wrapper > div.is-section-60:first-child { min-height: 60vh; height: auto; display: flex; align-items: center;  }
+    .is-wrapper > div.is-section-70:first-child { min-height: 70vh; height: auto; display: flex; align-items: center;  }
+    .is-wrapper > div.is-section-80:first-child { min-height: 80vh; height: auto; display: flex; align-items: center;  }
+    .is-wrapper > div.is-section-90:first-child { min-height: 90vh; height: auto; display: flex; align-items: center; }
+    .is-wrapper > div.is-section-100:first-child { min-height: 100vh; height: auto; display: flex; align-items: center;  }
+    .is-wrapper > div.is-section .is-boxes { /*overflow-y: hidden;*/ }
+
+    .is-wrapper > div.is-section-20 .is-container { padding-top: 3rem; padding-bottom: 3rem;  }
+    .is-wrapper > div.is-section-30 .is-container { padding-top: 3rem; padding-bottom: 3rem;  }
+    .is-wrapper > div.is-section-40 .is-container { padding-top: 3rem; padding-bottom: 3rem;  }
+    .is-wrapper > div.is-section-50 .is-container { padding-top: 3rem; padding-bottom: 3rem;  }
+    .is-wrapper > div.is-section-60 .is-container { padding-top: 3rem; padding-bottom: 3rem;  }
+    .is-wrapper > div.is-section-70 .is-container { padding-top: 3rem; padding-bottom: 3rem;  }
+    .is-wrapper > div.is-section-80 .is-container { padding-top: 3rem; padding-bottom: 3rem; }
+    .is-wrapper > div.is-section-90 .is-container { padding-top: 3rem; padding-bottom: 3rem; }
+    .is-wrapper > div.is-section-100 .is-container { padding-top: 3rem; padding-bottom: 3rem;  }
+
+    .is-wrapper { min-height: 0; }
+    .is-wrapper .is-section.is-section-100:first-of-type {  }
+    .is-section-100,.is-section-100.is-box {  }
+    .is-box { /*min-height: 0 !important; */}
+    .is-boxes { display: flex; flex-wrap: wrap; }
+    .is-section[data-collection] > .is-boxes { display: block; }
+
+    .is-boxes .is-box-centered { display: flex; flex-wrap: wrap; align-items: center; height: 100%;}
+    .is-boxes .is-box-centered.is-opacity-90 > .is-container { height: 100%; }
+    .is-boxes .is-box-centered.is-opacity-80 > .is-container { height: 100%; }
+    .is-boxes .is-box-centered.is-opacity-70 > .is-container { height: 100%; }
+    .is-boxes .is-box-centered.is-opacity-60 > .is-container { height: 100%; }
+    .is-boxes .is-box-centered.is-opacity-50 > .is-container { height: 100%; }
+    .is-boxes .is-box-centered.is-opacity-40 > .is-container { height: 100%; }
+    .is-boxes .is-box-centered.is-opacity-30 > .is-container { height: 100%; }
+    .is-boxes .is-box-centered.is-opacity-20 > .is-container { height: 100%; }
+    .is-boxes .is-box-centered.is-opacity-10 > .is-container { height: 100%; }
+    .is-boxes > .is-box { order: 2; }
+    .is-boxes > .is-box.is-box-img { display: flex; order: 1; } /*images always first*/
+    .is-box-centered > .is-container { /*display: flex; align-items: center;*/ }
+
+    .is-content-1200 { /*width: 90%;*/ margin: 0 auto; }
+    .is-content-1100 { /*width: 90%;*/ margin: 0 auto; }
+    .is-content-1050 { /*width: 90%;*/ margin: 0 auto; }
+    .is-content-980 { /*width: 90%;*/ margin: 0 auto; }
+    .is-content-970 { /*width: 90%;*/ margin: 0 auto; }
+    .is-content-800 { /*width: 90%;*/ margin: 0 auto; }
+    .is-content-640 { /*width: 90%;*/ margin: 0 auto; }
+    .is-content-500 { /*width: 90%;*/ margin: 0 auto; }
+    .is-content-380 { /*width: 90%;*/ margin: 0 auto; }
+
+    .show-mobile-menu .website-body { margin-top: 50px; }
+    .show-mobile-menu .website-header-mobile { height: 100vh; }
+    .show-mobile-menu .powered-by { display: none; }
+    
+    .website-header-mobile .navheader { display: flex; align-items: center; flex: 0 0; width: 100%; padding: 0;  min-height: 68px; }
+    .website-header-mobile .navheader .logo { flex: 1 1 auto; padding: 10px 15px;}
+    
+    .website-header-mobile .navheader .logo img { max-height: 50px; }
+    .website-header-mobile .navheader.has-vertical-logo { text-align: center; }
+    .website-header-mobile .hamburger { position: absolute; top: 0; right: 0; height: 68px; display: flex; align-items: center; /*padding: 10px;*/ }
+    .website-header-mobile .hamburger a { color: #aaa; font-size: 24px; padding: 0 20px 0 0;}
+    .website-header-mobile .navlinks { display: none; background: rgba(255,255,255,.97); transition: all 0.3s; flex: 1 1 auto; flex-direction: column; flex-wrap: wrap; overflow-y: auto; }
+    .website-header-mobile .navlinks .links { flex: 1 1 auto; overflow-y: auto; list-style: none; margin: 0; padding: 20px; text-align: center; }
+    .website-header-mobile .navlinks .links li a { font-size: 20px; }
+
+    .website-header-mobile .navlinks .submenu { margin: 0; color: #aaa; height: 0; overflow: hidden; opacity: 0; transition: all 0.3s ease-out; }
+    .website-header-mobile .navlinks .links .fa-chevron-down { padding: 0 20px; margin-right: -20px; cursor: pointer; color: #aaa;  cursor: pointer; }
+    .website-header-mobile .navlinks li.trigger .submenu { /*height: auto;*/ opacity: 1;}
+    .website-header-mobile .navlinks .social-media { flex: 0 0 auto; }
+    .show-mobile-menu .website-header-mobile .navlinks { display: block;}
+    .website-header-mobile .social-media { display: flex; justify-content: center; margin-bottom: 50px;}
+    .website-header-mobile .social-media li { padding: 0 15px; }
+
+    .absolute-header .website-body { margin-top: 0; }
+    .absolute-header .website-header-mobile { position: absolute; }
+    .absolute-header .website-header-mobile .navheader { background: none !important; }
+    .show-mobile-menu .navheader { background: #fff !important;}
+
+    .footer-mariana .website-footer .menu-items { text-align: left; }
+}
+
+
+.is-section {    font-size: 1.25vw; overflow-y: visible; }
+.is-wrapper .is-box.is-spacer .is-container { margin: 20px auto; }
+.is-spacer .is-boxes { min-height: 80px; }
+
+.is-btn-row .is-btn { display: inline-block; }
+
+@media screen and (max-width: 990px) {
+    .is-section h4 { margin: 0; padding: 0; }
+    .is-section h1, .is-section h2, .is-section h3, .is-section h4 { text-align: center !important;  }
+    .is-section p { text-align: left; }
+    .is-wrapper .is-box .is-container { margin-top: 0 !important; margin-bottom: 0 !important;}
+    .is-boxes .row { margin-bottom: 15px; }
+    .is-boxes .row.is-btn-row .col-md-12 { text-align: center !important; }
+    .is-boxes .row.is-btn-row p { text-align: center; }
+    .is-box-6 .row { text-align: center; }
+    .is-directory-grid { max-width: 100% !important; padding: 0 15px; }
+    .col-md-4, .col-md-6 { margin-bottom: 15px; }
+    .col-md-4:last-child, .col-md-6:last-child { margin-bottom: 0; }
+    .is-boxes .is-box-centered { display: block; }
+    .is-box-centered { /*display: block; */}
+    .is-box-centered.is-content-top, .is-box-centered.is-content-bottom { vertical-align: middle;  }
+    .is-box-centered > .is-container {  }
+    
+    .col-md-4 > img, .col-md-6 > img, .col-md-12 > img { display: block; margin: 0 auto 10px auto;}
+
+    .is-section-100 > .is-boxes { /*height: 100vh !important;*/ }
+    .is-section-100 > .is-boxes .is-box-5 { height: auto; min-height: 40vh; }
+    .is-section-100 > .is-boxes .is-box-6 { height: auto; min-height: 50vh; }
+    .is-section-100 > .is-boxes .is-box-7 { height: auto; min-height: 60vh; }
+}
+@media screen and (max-width: 600px) {
+    .is-spacer, .spacer { display: none !important; }
+}
+
+.is-gallery-grid { padding: 0 0;}
+.justified-gallery > div { opacity: 1; }
+.grid {  margin: 0 auto;  }
+.grid-sizer {    display: none;}
+.thumb-masonry .grid-item {    padding: 4px;}
+.thumb-masonry .grid-sizer, .thumb-masonry .grid-item { width: 20.0%; display: block; }
+
+.thumb-masonry .grid-item.x2 { width: 40%;}
+.thumb-masonry.thumb-large .grid-item.x2 { width: 50%;}
+.thumb-masonry.thumb-small .grid-item.x2 { width: 33.333%;}
+@media screen and (max-width: 1900px) { .thumb-masonry .grid-sizer, .thumb-masonry .grid-item { width: 25.0%; display: block; } .thumb-masonry .grid-item.x2 { width: 50%;} }
+@media screen and (max-width: 1200px) { .thumb-masonry .grid-sizer, .thumb-masonry .grid-item { width: 33.333%; display: block; } .thumb-masonry .grid-item.x2 { width: 66.67%;} }
+@media screen and (max-width: 600px) { .thumb-masonry .grid-sizer, .thumb-masonry .grid-item { width: 50.0%; display: block; } .thumb-masonry .grid-item.x2 { width: 100%;} }
+.thumb-masonry.thumb-large .grid-sizer, .thumb-masonry.thumb-large .grid-item { width: 25.0%; display: block; }
+@media screen and (max-width: 1900px) { .thumb-masonry.thumb-large .grid-sizer, .thumb-masonry.thumb-large .grid-item { width: 33.333%; display: block; } .thumb-masonry.thumb-large .grid-item.x2 { width: 66.667%;} }
+@media screen and (max-width: 1200px) { .thumb-masonry.thumb-large .grid-sizer, .thumb-masonry.thumb-large .grid-item { width: 50.0%; display: block; } .thumb-masonry.thumb-large .grid-item.x2 { width: 100%;} }
+@media screen and (max-width: 600px) { .thumb-masonry.thumb-large .grid-sizer, .thumb-masonry.thumb-large .grid-item { width: 50.0%; display: block; } .thumb-masonry.thumb-large .grid-item.x2 { width: 100%;} }
+.thumb-masonry.thumb-small .grid-sizer, .thumb-masonry.thumb-small .grid-item { width: 16.665%; display: block; }
+@media screen and (max-width: 1900px) { .thumb-masonry.thumb-small .grid-sizer, .thumb-masonry.thumb-small .grid-item { width: 20.0%; display: block; } .thumb-masonry.thumb-small .grid-item.x2 { width: 40%;} }
+@media screen and (max-width: 1200px) { .thumb-masonry.thumb-small .grid-sizer, .thumb-masonry.thumb-small .grid-item { width: 25.0%; display: block; } .thumb-masonry.thumb-small .grid-item.x2 { width: 50%;} }
+@media screen and (max-width: 600px) { .thumb-masonry.thumb-small .grid-sizer, .thumb-masonry.thumb-small .grid-item { width: 50.0%; display: block; } .thumb-masonry.thumb-small .grid-item.x2 { width: 100%;} }
+
+
+.thumb-masonry .grid-item .wrapper { position: relative; height: 0; display: block; width: 100.0%; overflow: hidden; background: #f5f5f5; }
+.thumb-justified .grid-item .wrapper { position: relative; height: 100%; width: 100%; }
+.thumb-justified .grid-item .wrapper img { max-height: 100%; }
+
+.grid[data-carousel="true"] .grid-item .overlay, .thumb-justified.grid[data-carousel="true"] .grid-item { cursor: pointer;  }
+.thumb-justified.grid[data-carousel="true"] .grid-item { opacity: 1; }
+
+.thumb-masonry .grid-item .wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.thumb-masonry .grid-item img {    display: block; margin: 0; width: 100%; height: auto !important;}
+
+.is-overlay-bg { /*opacity: 0;*/ }
+.is-overlay-bg.pllx { background-attachment: fixed; }
+.lazyfade { opacity: 0;  transition: opacity ease 1.0s;}
+.lazyfade.lazyloaded, .lazyloaded { opacity: 1; pointer-events: none; }
+a > .lazyloaded, .p-img > .lazyloaded, p > .lazyloaded { pointer-events: all !important;  }
+
+.grid.thumb-masonry.thumb-padding0 .grid-item {    padding: 0px;}
+.grid.thumb-masonry.thumb-padding8 .grid-item {    padding: 4px;}
+.grid.thumb-masonry.thumb-padding20 .grid-item {    padding: 10px;}
+.grid.thumb-masonry.thumb-padding70 .grid-item {    padding: 35px;}
+.grid.thumb-masonry.thumb-padding0{    margin: 0px;}
+.grid.thumb-masonry.thumb-padding8 {    margin: 4px;}
+.grid.thumb-masonry.thumb-padding20 {    margin: 10px;}
+.grid.thumb-masonry.thumb-padding70 {    margin: 35px;}
+@media screen and (max-width: 990px) {
+    .grid.thumb-masonry.thumb-padding0 .grid-item {    padding: 0px;}
+    .grid.thumb-masonry.thumb-padding8 .grid-item {    padding: 4px;}
+    .grid.thumb-masonry.thumb-padding20 .grid-item {    padding: 4px;}
+    .grid.thumb-masonry.thumb-padding70 .grid-item {    padding: 4px;}
+    .grid.thumb-masonry.thumb-padding0{    margin: 0px;}
+    .grid.thumb-masonry.thumb-padding8 {    margin: 0;}
+    .grid.thumb-masonry.thumb-padding20 {    margin: 0;}
+    .grid.thumb-masonry.thumb-padding70 {    margin: 0;}
+
+    .is-wrapper .is-box.is-spacer .is-container { margin: 0 auto; }
+    .is-spacer .is-boxes { min-height: 0; }
+    .is-overlay-bg.pllx { background-attachment: inherit; }
+
+    a > .lazyloaded, .p-img > .lazyloaded, p > .lazyloaded { width: 100%; max-width: 100%; }
+}
+/*11/2026 photos in text (the builder text toolbar's photo button): a placement class on the img. Specific enough to beat
+  'p > .lazyloaded { width: 100% }' above, so a photo on the left/right keeps text beside it on tablets; full width on phones*/
+.is-container img.lf-img-full { display: block; width: 100%; height: auto; }
+.is-container img.lf-img-center { display: block; width: 60%; height: auto; margin: 0 auto; }
+.is-container img.lf-img-left { float: left; width: 45%; height: auto; margin: .35em 1.5em 1em 0; }
+.is-container img.lf-img-right { float: right; width: 45%; height: auto; margin: .35em 0 1em 1.5em; }
+.is-container div:has(> p .lf-img-left, > p .lf-img-right) { display: flow-root; } /*the text holds its floats: nothing spills into the next block*/
+@media screen and (max-width: 600px) {
+    .is-container img.lf-img-left, .is-container img.lf-img-right, .is-container img.lf-img-center { float: none; display: block; width: 100%; margin: 0 0 1em; }
+}
+@media screen and (max-width: 767.98px) {
+    /*11/2026 photo + text in two columns: the photo column stacks first on phones, like .is-box-img blocks above (rows where both
+    or neither column has a photo keep page order; the block's "Stacking order: reversed" puts the photo last)*/
+    .is-container .row > [class*="col-"]:nth-child(1 of [class*="col-"]):not(:has(img)) + [class*="col-"]:nth-last-child(1 of [class*="col-"]):has(img) { order: -1; } /*(:has can't nest, so: text column then photo column, no other column; "of" skips the builder's row tools)*/
+}
+
+.grid-item.square-horizontal .wrapper img {height: 100% !important; width: auto !important; left: -25%; max-width: none;}
+.grid-item.square-vertical .wrapper img {width: 100% !important; height: auto !important; top: -25%;}
+
+.spinner-donut {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.1s;
+    z-index: -1;
+    width: 3rem;
+    height: 3rem;
+    margin: 3rem;
+    border-radius: 50%;
+    border: 0.3rem solid rgba(151, 159, 208, 0.3);
+    border-top-color: #979fd0;
+    &.multi {
+    border-bottom-color: #979fd0;
+  }
+}
+.slick-current .spinner-donut {    
+    animation: 1.0s spin infinite linear;    
+    opacity: 1;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.image-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;}
+.caption { font-size: 12px; padding: 3px 3px 6px 3px; line-height: normal;  z-index: 6;}
+.caption:empty { display: none; }
+.link-wrapper { display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;}
+.gallery-caption-overlay .caption { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,.5); color: #fff; padding: 6px 8px; opacity: 0; transition: all 0.5s; }
+.gallery-caption-overlay.thumb-padding8 .caption { bottom: 4px; left: 4px; right: 4px;}
+.gallery-caption-overlay.thumb-padding20 .caption { bottom: 10px; left: 10px; right: 10px;}
+.gallery-caption-overlay.thumb-padding70 .caption { bottom: 17.5px; left: 17.5px; right: 17.5px;}
+.thumb-justified.gallery-caption-overlay .caption { bottom: 0; left: 0; right: 0;}
+.gallery-caption-overlay .grid-item:hover .caption { opacity: 1; }
+.gallery-caption-overlay .overlay {  }
+.gallery-caption-bottom {}
+
+.gallery-caption-overlay-center .overlay { top: 0; left: 0; bottom: 0; right: 0;  !important;}
+.gallery-caption-overlay-center .caption { position: absolute; top: 0; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,.85); opacity: 0; transition: all 0.3s; }
+.gallery-caption-overlay-center.gcoc-black .caption { background: rgba(0,0,0,.8); }
+.gallery-caption-overlay-center .grid-item { transition: all 0.3s; }
+.gallery-caption-overlay-center .caption span { position: absolute; top: 50%; left: 10%; right: 10%; transform: translateY(-50%); background: none; text-align: center; color: #222; font-size: 1rem;}
+.gallery-caption-overlay-center.gcoc-black .caption span { color: #fff; }
+.gallery-caption-overlay-center .grid-item:hover .caption { opacity: 1; }
+
+
+.gallery-width-100 {  }
+.gallery-width-90 { width: 90% !important; margin: 0 auto !important; }
+.gallery-width-80 { width: 80% !important; margin: 0 auto !important; }
+.gallery-width-70 { width: 70% !important; margin: 0 auto !important; }
+.gallery-width-60 { width: 60% !important; margin: 0 auto !important; }
+
+.is-gallery-grid .grid-item .overlay { opacity: 0; transition: 0.5s all; position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; z-index: 5; }
+.thumb-overlay-color-white .grid-item .overlay { background-color: #fff; }
+.thumb-overlay-color-black .grid-item .overlay { background-color: #1a1a1a; }
+
+.gallery-hover-fade .wrapper img, .gallery-hover-zoom .wrapper img, .gallery-hover-shadow .wrapper, .gallery-hover-overlay .wrapper .overlay { transition: all ease 1s;}
+.gallery-hover-zoom .wrapper:hover img { transform: scale(1.1);}
+.gallery-hover-fade .wrapper:hover img { opacity: .7; }
+.gallery-hover-shadow .wrapper:hover { box-shadow: 0 0 15px rgba(0,0,0,.3); }
+.gallery-hover-overlay .wrapper:hover .overlay { opacity: .3; }
+
+.thumb-justified.gallery-hover-fade .grid-item img, .thumb-justified.gallery-hover-zoom .grid-item img, .thumb-justified.gallery-hover-shadow .grid-item, .thumb-justified.gallery-hover-overlay .grid-item .overlay { transition: all 0.5s;}
+.thumb-justified.gallery-hover-zoom .grid-item:hover img { transform: scale(1.1);}
+.thumb-justified.gallery-hover-fade .grid-item:hover img { opacity: .7; }
+.thumb-justified.gallery-hover-shadow .grid-item:hover { box-shadow: 0 0 15px rgba(0,0,0,.3); }
+.thumb-justified.gallery-hover-overlay .grid-item:hover .overlay { opacity: .3; }
+
+.slider-arrow-color-black .slick-arrow i { color: #111; }
+.slider-arrow-color-white .slick-arrow i { color: #fff; }
+
+.website-header { opacity: 0; }
+.website-header .company-name {    text-align: center;}
+.website-header .company-name a { line-height: normal; }
+.website-header .company-name img { max-width: 100%; max-height: 100%; }
+.website-header .company-name img.logo-size-xs { max-height: 60%; }
+.website-header .company-name img.logo-size-small { max-height: 80%; }
+.website-header .company-name img.logo-size-medium { max-height: 100%; }
+.website-header .company-name img.logo-size-large { max-height: 100%; }
+.website-header .menu-items li > a {  transition: all 0.3s;  }
+.website-header .menu-items li .submenu a {  }
+.website-header .menu-items li.active > a {  }
+.website-header .menu-items li > a:hover {  text-decoration: none; }
+
+
+
+.website-header .social-media li > a { transition: all 0.3s; padding: 5px 8px; }
+.website-header .social-media li > a:hover { text-decoration: none; opacity: 0.7; }
+
+.header-upper-case .website-header .menu-items li > a {  }
+
+
+.absolute-header { position: relative; }
+.absolute-header:not(.header-rainier) .website-header { background-color: transparent !important; }
+.absolute-header:not(.header-rainier) .website-header .company-name a:hover {/* text-shadow: 0 0 4px #555;*/ opacity: .7; }
+.absolute-header:not(.header-rainier) .website-header { position: absolute; top: 0; left: 0; right: 0; z-index: 10;  }
+.absolute-header:not(.header-rainier) .website-header .company-name a {  /*color: #fff;text-shadow: 0 0 4px #aaa;*/ }
+.absolute-header:not(.header-rainier) .website-header .menu-items li > a {  /*color: #fff;text-shadow: 0 0 4px #aaa;*/ }
+.absolute-header:not(.header-rainier) .website-header .menu-items li.active > a { }
+.absolute-header:not(.header-rainier) .website-header .menu-items li > a:hover { /*text-shadow: 0 0 4px #555;*/ opacity: .7; }
+.absolute-header:not(.header-rainier) .website-header .social-media li > a {  /*color: #fff;text-shadow: 0 0 4px #aaa;*/ }
+.absolute-header:not(.header-rainier) .website-header .social-media li > a:hover { /*text-shadow: 0 0 4px #555;*/  opacity: .7;}
+.absolute-header:not(.header-rainier) .website-header-container { padding-bottom: 0 !important; background-color: transparent; }
+.absolute-header:not(.header-rainier) .website-contents > .is-section:first-child .is-container { margin-top: 140px; }
+.absolute-header.header-denali .website-contents > .is-section:first-child .is-container { margin-top: 180px; }
+.absolute-header.header-blanc .website-contents > .is-section:first-child .is-container { margin-top: 180px; }
+
+.header-denali {}
+.header-denali .website-header-container { padding-top: 35px; padding-bottom: 35px; }
+.header-denali.header-spacing-narrow .website-header-container { padding-top: 20px; padding-bottom: 20px;}
+.header-denali.header-spacing-wide .website-header-container { padding-top: 55px; padding-bottom: 55px; }
+.header-denali .website-header-container > .company-name { text-align: center; margin-bottom: 10px; }
+.header-denali.header-has-logo .website-header .company-name { max-width: 70%; margin: 0 auto;}
+.header-denali.header-has-logo .website-header .company-name img { max-height: 200px; }
+.header-denali.header-has-logo .website-header .company-name img.logo-size-xs { max-height: 100px; max-width: 100px; }
+.header-denali.header-has-logo .website-header .company-name img.logo-size-small { max-height: 150px; max-width: 150px; }
+.header-denali.header-has-logo .website-header .company-name img.logo-size-medium { max-height: 200px; max-width: 200px; }
+.header-denali.header-has-logo .website-header .company-name img.logo-size-large { max-height: 250px; max-width: 250px; }
+
+.header-blanc {}
+.header-blanc .website-header-container { padding-top: 35px; padding-bottom: 35px; display: flex;  flex-wrap: wrap; align-items: flex-start; }
+.header-blanc.header-spacing-narrow .website-header-container { padding-top: 20px; padding-bottom: 20px; }
+.header-blanc.header-spacing-wide .website-header-container { padding-top: 55px; padding-bottom: 55px; }
+.header-blanc .website-header .menu-items { flex: 1 1 calc(100% - 300px);  }
+.header-blanc .website-header .social-media, .header-blanc .website-header .spacer { flex: 0 0 150px; }
+.header-blanc .website-header-container > .company-name { text-align: center; padding: 10px 0; margin-top: 15px; flex: 0 0 100%; border-top: 1px solid rgba(0, 0, 0, .08); }
+.header-blanc.header-has-logo .website-header .company-name { padding-bottom: 0; }
+.header-blanc.header-has-logo .website-header .company-name a { max-width: 70%; margin: 0 auto; transition: all 0.3s; }
+.header-blanc.header-has-logo .website-header .company-name img { max-height: 200px; }
+.header-blanc.header-has-logo .website-header .company-name img.logo-size-xs { max-height: 100px; max-width: 100px; }
+.header-blanc.header-has-logo .website-header .company-name img.logo-size-small { max-height: 150px; max-width: 150px; }
+.header-blanc.header-has-logo .website-header .company-name img.logo-size-medium { max-height: 200px; max-width: 200px; }
+.header-blanc.header-has-logo .website-header .company-name img.logo-size-large { max-height: 250px; max-width: 250px; }
+
+.header-andes .website-header-container {    display: flex; padding-top: 35px; padding-bottom: 35px; }
+.header-andes.header-spacing-narrow .website-header-container { padding-top: 20px; padding-bottom: 20px; }
+.header-andes.header-spacing-wide .website-header-container { padding-top: 55px; padding-bottom: 55px; }
+.header-andes .website-header-container > ul {            }
+.header-andes .website-header-container .social-media { flex: 0 1 auto; align-self: flex-start; }
+.header-andes .website-header-container .social-media:empty { flex: 0 0 0;}
+.header-andes .website-header-container .menu-items { flex: 1 1 auto; justify-content: flex-end; align-self: flex-start; }
+.header-andes .website-header-container > .company-name { flex: 1 1 auto;  text-align: left; display: flex; flex-wrap: wrap; align-items: center; }
+.header-andes.header-has-logo .website-header .company-name { max-width: 70%; }
+.header-andes.header-has-logo .website-header .company-name img { max-height: 200px; }
+.header-andes.header-has-logo .website-header .company-name img.logo-size-xs { max-height: 100px; max-width: 100px; }
+.header-andes.header-has-logo .website-header .company-name img.logo-size-small { max-height: 150px; max-width: 150px; }
+.header-andes.header-has-logo .website-header .company-name img.logo-size-medium { max-height: 200px; max-width: 200px; }
+.header-andes.header-has-logo .website-header .company-name img.logo-size-large { max-height: 250px; max-width: 250px; }
+
+.header-fuji .website-header-container { display: flex; align-items: center; padding-top: 35px; padding-bottom: 35px; }
+.header-fuji.header-spacing-narrow .website-header-container { padding-top: 20px; padding-bottom: 20px; }
+.header-fuji.header-spacing-wide .website-header-container { padding-top: 55px; padding-bottom: 55px; }
+.header-fuji .website-header .menu-items-left { flex: 1 1 auto; justify-content: flex-end; }
+.header-fuji .website-header .company-name { flex: 0 1 auto; padding: 0 20px; }
+.header-fuji.header-has-logo .website-header .company-name { max-width: 30%;}
+.header-fuji.header-has-logo .website-header .company-name img { max-height: 200px; }
+.header-fuji.header-has-logo .website-header .company-name img.logo-size-xs { max-height: 100px; max-width: 100px; }
+.header-fuji.header-has-logo .website-header .company-name img.logo-size-small { max-height: 150px; max-width: 150px; }
+.header-fuji.header-has-logo .website-header .company-name img.logo-size-medium { max-height: 200px; max-width: 200px; }
+.header-fuji.header-has-logo .website-header .company-name img.logo-size-large { max-height: 250px; max-width: 250px; }
+.header-fuji .website-header .menu-items-right { flex: 1 1 auto; justify-content: flex-start;  }
+
+/*.header-rainier.website-wrapper { display: flex; height: 100vh;}
+.header-rainier .website-header { flex: 0 0 300px; height: 100%;}
+.header-rainier .website-header-container {    display: flex; flex-direction: column; height: 100%;  }
+.header-rainier .website-header .company-name {    flex: 0 1 auto; text-align: left; padding: 20px 20px 0 20px; }
+.header-rainier .website-header .company-name img { max-width: 70% !important;    }
+.header-rainier .website-header .menu-items {    display: block;    flex: 1 0 auto;}
+.header-rainier .website-header .menu-items > li { padding: 0 20px;}
+.header-rainier .website-header .social-media {    flex: 0 1 auto; padding: 0 20px 20px 20px; }
+.header-rainier .website-header .social-media li {        display: inline-block;        padding: 0 5px;    }
+.header-rainier .website-body {    height: 100%;    overflow-y: auto; }
+.header-rainier .website-contents {   height: 100%; }
+.header-rainier .website-footer { display: none; }*/
+
+
+.header-rainier.website-wrapper { /*display: flex;*/ height: 100vh;}
+.header-rainier .website-body {  /*height: 100%; for scroller*/}
+.header-rainier .website-header { opacity: 1; }
+.header-rainier .website-header-container { /*opacity: 0;*/ pointer-events: all; padding-left: 0; padding-right: 0; }
+.header-rainier .website-header { position:fixed; top: 0; left: 0; height: 100%; width: 300px; z-index:99;  }
+.header-rainier .website-header-container {    display: flex; flex-direction: column; height: 100%;  }
+.header-rainier .website-header .company-name {    flex: 0 0; text-align: left; padding: 40px 20px 0 20px; margin-bottom: 20px; }
+.header-rainier .website-header .company-name a { padding-left: 0; padding-right: 0; /*max-width: 80%;*/ display: block; }
+.header-rainier .website-header .company-name img { max-width: 100%; max-height: 200px;    }
+.header-rainier .website-header .company-name img.logo-size-xs { max-height: 100px; max-width: 100px; }
+.header-rainier .website-header .company-name img.logo-size-small { max-height: 150px; max-width: 150px; }
+.header-rainier .website-header .company-name img.logo-size-medium { max-height: 200px; max-width: 200px; }
+.header-rainier .website-header .company-name img.logo-size-large { max-height: 250px; max-width: 250px; }
+
+.header-rainier .website-header .menu-items {    display: block;    flex: 1 1 auto; overflow-y: auto; }
+.header-rainier .website-header .menu-items > li { padding: 0 20px;}
+.header-rainier .website-header .menu-items > li a { padding: 5px 0; }
+.header-rainier .website-header .social-media {    flex: 0 0; padding: 0 20px 40px 20px; }
+.header-rainier .website-header .social-media li {        display: inline-block;        padding: 0 5px;    }
+.header-rainier .website-body {  position: absolute; top: 0; left: 300px; right: 0; overflow: hidden;  }
+.header-rainier .website-contents {   height: 100%; }
+.header-rainier .website-footer { display: none; }
+
+.header-rainier .website-header .company-name a { text-align: left; }
+.header-rainier.header-spacing-narrow .website-header-container, .header-rainier.header-spacing-narrow .website-header .company-name a { text-align: center; margin: 0 auto; }
+.header-rainier.header-spacing-narrow .social-media { justify-content: center;}
+.header-rainier.header-spacing-wide .website-header-container, .header-rainier.header-spacing-wide .website-header .company-name a { text-align: right; margin-left: auto; }
+.header-rainier.header-spacing-wide.header-has-logo .website-header .company-name a { text-align: right; }
+.header-rainier.header-spacing-wide .social-media { justify-content: flex-end;}
+
+@media screen and (max-width: 990px) {
+    .header-rainier.website-wrapper { height: auto; }
+    .header-rainier .website-body { position: relative; top: auto; left: auto; bottom: auto; right: auto; overflow: visible; }
+
+    .gallery-width-90 { width: 100% !important;  }
+    .gallery-width-80 { width: 100% !important;  }
+    .gallery-width-70 { width: 100% !important;  }
+    .gallery-width-60 { width: 100% !important;  }
+}
+
+
+.website-footer { text-align: center; position: relative; margin: 0 auto; }
+.website-footer .website-footer-container { display: flex; flex-wrap: wrap; letter-spacing: .5px;  margin: 0 auto; }
+.website-footer ul li { display: inline-block; font-size: inherit; }
+.website-footer a { transition: all 0.3s; }
+.website-footer .company-about { margin-bottom: 1rem; }
+.website-footer .menu-items > li { position: relative; display: flex; align-items: center; }
+.website-footer .menu-items ul { top: auto; bottom: 100%; }
+.footer-mariana .website-footer .menu-items ul {/*top: auto; right: 100%; left: auto; bottom: 0;*/}
+.website-header .menu-items > li .fa-chevron-down { opacity: .7; padding-left: 10px; cursor: pointer; }
+.website-footer .menu-items > li .fa-chevron-down { opacity: .7; padding-left: 7px; cursor: pointer; }
+.website-footer .menu-items li .submenu a { color: inherit; font-size: inherit; }
+
+.website-footer .company-header { margin: 0 auto; }
+.website-footer .company-header a { text-decoration: none; display: block; }
+.website-footer .company-header img { max-width: 200px; max-height: 100px; }
+
+.website-footer .lightfolio-badge {  margin-top: 20px; flex-basis: 100%; text-align: left;  }
+.website-footer .lightfolio-badge a { opacity: 0.3; display: inline-block; transition: opacity 0.5s; }
+.website-footer .lightfolio-badge a:hover { opacity: 1; }
+.website-footer .lightfolio-badge img { width: 22px; }
+
+
+
+.website-footer { /*padding-top: 40px; padding-bottom: 40px;*/  }
+/*.website-footer-container * { line-height: 2.5rem !important;}*/
+.website-footer-container { padding-top: 50px; padding-bottom: 50px; }
+
+.footer-spacing-narrow .website-footer-container { padding-top: 30px; padding-bottom: 30px; }
+.footer-spacing-narrow .website-footer-container * { line-height: 1.5rem !important;}
+.footer-spacing-wide .website-footer-container { padding-top: 70px; padding-bottom: 70px; }
+.footer-spacing-wide .website-footer-container * { line-height: 3rem !important;}
+
+.footer-tonga { }
+.footer-tonga .website-footer-container > *:first-child { text-align: left; }
+.footer-tonga .website-footer-container > *:nth-child(2) { text-align: right;  }
+.footer-tonga .website-footer-container > *:nth-child(2) > li { justify-content: right; }
+.footer-tonga .website-footer-container .has-submenu > i { order: 1; }
+.footer-tonga .website-footer-container .has-submenu > a { order: 2; }
+.footer-tonga .website-footer-container .has-submenu > .submenu { order: 3; }
+.footer-tonga .website-footer-container > *:nth-child(3) { text-align: left; }
+.footer-tonga .website-footer .social-media { flex: 1 1 50%; padding-bottom: 10px; }
+.footer-tonga .website-footer .menu-items { flex: 1 1 auto; padding-bottom: 10px; }
+.footer-tonga .website-footer .menu-items li { flex-wrap: wrap; }
+.footer-tonga .website-footer .menu-items li a { padding-left: 10px !important; }
+.footer-tonga .website-footer .menu-items .submenu { flex-basis: 100%;  }
+.footer-tonga .website-footer .menu-items .submenu li { display: block;}
+.footer-tonga .website-footer .company-name { flex: 0 0 50%;  }
+.footer-tonga .website-footer .menu-items a {display: inline-block; padding: 0 12px;}
+.footer-tonga .website-footer .social-media a {display: block; padding: 0 5px;}
+.footer-tonga .website-footer .lightfolio-badge { padding-left: 10px;  }
+
+.footer-molloy {}
+.footer-molloy .website-footer .social-media { flex: 0 0 100%; }
+.footer-molloy .website-footer .menu-items { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; flex: 0 0 100%; padding-bottom: 10px;  }
+.footer-molloy .website-footer .menu-items li { flex-wrap: wrap; }
+.footer-molloy .website-footer .menu-items li a { padding-left: 10px !important; }
+.footer-molloy .website-footer .menu-items li i { padding-left: 0; padding-right: 10px; padding-top: 5px;}
+.footer-molloy .website-footer .menu-items .submenu {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    z-index: 2;
+    margin-top: -2px;
+    text-align: left;
+}
+.footer-molloy .website-footer .menu-items li .submenu { box-shadow: 0 0 10px rgba(0,0,0,.1); background: #eee; }
+.footer-molloy .website-footer .menu-items li .submenu a { padding: 7px 20px !important;   }
+
+.footer-molloy .website-footer .company-name { flex: 0 0 100%; padding-bottom: 10px;  }
+.footer-molloy .website-footer .menu-items a {display: inline-block; padding: 5px 12px;}
+.footer-molloy .website-footer .social-media a {display: block; padding: 5px 5px;}
+.footer-molloy .website-footer .lightfolio-badge { text-align: center;  }
+
+.footer-mariana { }
+
+.footer-mariana .website-footer .company-about { flex: 0 1 300px; text-align: left; padding-right: 50px;  }
+.footer-mariana .website-footer .social-media { flex: 0 1 170px; text-align: left; padding-right: 50px; }
+.footer-mariana .website-footer .company-contact { flex: 1 1 auto; text-align: left; padding-right: 50px; }
+.footer-mariana .website-footer .company-contact a { text-decoration: none; }
+.footer-mariana .website-footer .company-contact a:hover { }
+.footer-mariana .website-footer .menu-items { flex: 0 1 auto; text-align: right; }
+.footer-mariana .website-footer .menu-items li { /*display: flex;  align-items: center;*/ justify-content: flex-end; flex-wrap: wrap; }
+.footer-mariana .website-footer .menu-items .submenu { flex-basis: 100%; order: 3; }
+.footer-mariana .website-footer .menu-items .submenu li { display: block;}
+.footer-mariana .website-footer .menu-items li a { order: 2; }
+.footer-mariana .website-footer .menu-items > li .fa-chevron-down { order: 1; opacity: .7; padding-left: 0; padding-right: 7px;}
+.footer-mariana .website-footer .menu-items a { padding: 0 0 ;}
+.footer-mariana .website-footer .menu-items .submenu a { display: block !important; width: 100%; padding: 0 0 !important;}
+.footer-mariana .website-footer .social-media a {display: block; padding: 5px 5px; }
+
+.footer-challenger {}
+.footer-challenger .website-footer .company-name { flex: 1 1; text-align: left; padding-bottom: 10px;  }
+.footer-challenger .website-footer .company-header { flex: 0 0 300px; padding-bottom: 10px;  }
+.footer-challenger .website-footer .company-header a { margin-bottom: 15px;}
+.footer-challenger .website-footer .social-media { flex: 0 0 200px; text-align: right; }
+.footer-challenger .website-footer .social-media a {display: block; padding: 5px 5px;}
+.footer-challenger .website-footer .lightfolio-badge { text-align: center;  }
+
+@media screen and (max-width: 990px) {
+    .website-footer-container { padding-top: 20px; padding-bottom: 20px; }
+    .footer-mariana .website-footer-container { display: block; }
+    .footer-mariana .website-footer .company-about { padding-right: 0; }
+    .footer-mariana .website-footer .social-media { display: block; padding-right: 0; }
+    .footer-mariana .website-footer .company-contact { padding-right: 0; margin-bottom: 1rem; }
+    .footer-mariana .website-footer .menu-items { text-align: left; }
+    .footer-mariana .website-footer .menu-items > li { display: inline-block; padding-right: 20px; vertical-align: top; }
+
+    .footer-tonga .website-footer-container { display: block; }
+    .footer-tonga .website-footer .social-media { padding-bottom: 0; }
+    .footer-tonga .website-footer .company-name { text-align: left; padding-left: 10px; }
+    .footer-tonga .website-footer .menu-items { text-align: left; padding-bottom: 0; }
+    .footer-tonga .website-footer .menu-items > li:first-child a { padding-left: 0;}
+
+    .footer-challenger .website-footer .company-name { flex: 0 0 100%; }
+    .footer-challenger .website-footer .company-header { flex: 0 0 100%; }
+    .footer-challenger .website-footer .social-media { flex: 0 0 100%; }
+
+    .is-section > .is-boxes:not(.no-width), .website-footer-container { max-width: 100% !important; }
+}
+
+
+body.noscroll { overflow-y: hidden; }
+.ws-carousel { position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 99999;  display: none;}
+/*.ws-carousel .close { position: absolute; top: 10px; right: 10px; z-index: 1000; color: rgba(255,255,255, .5);  text-shadow: 0 0 4px #555; }
+.ws-carousel .close:hover { color: rgba(255,255,255, .8);  }*/
+
+.btn-style-1 .is-btn, .btn-style-1.is-btn { border-width: 2px; /*line-height: initial;*/ } /*square*/
+.btn-style-2 .is-btn, .btn-style-2.is-btn { border-width: 2px; /*line-height: initial;*/ border-radius: .5rem; } /*rounded*/
+.btn-style-3 .is-btn, .btn-style-3.is-btn { border-width: 2px; /*line-height: initial;*/ border-radius: 2rem;} /*pill*/
+.btn-style-4 .is-btn, .btn-style-4.is-btn { border-width: 2px; /*line-height: initial;*/ background-color: transparent !important; } /*outline*/
+
+.btn-size-small .is-btn { padding: 1rem 2rem; }
+.btn-size-medium .is-btn { padding: 1.25rem 2.5rem; }
+.btn-size-large .is-btn { padding: 1.5rem 3rem; }
+
+.slider-on-box { opacity: 0; transition: opacity 1.0s; }
+.slider-on-box.slick-initialized { opacity: 1; }
+.slick-arrow{ position: absolute; top: 30%; bottom: 30%; width: 49%; z-index: 6; cursor: pointer; }
+.slick-arrow i { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background-color: rgba(0,0,0,.35); font-size: 24px; color: #fff; opacity: 0.5; transition: opacity 0.3s;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+    
+    padding: 10px;
+}
+.dark .slick-arrow i {background: rgba(255,255,255,0.1); color: #aaa;}
+.slick-arrow:hover i {opacity: 1.0;}
+.slick-prev {left: 0; text-align: left;}
+.slick-prev i {margin-left: 3%; left: 0;}
+.slick-next {right: 0; text-align: right;}
+.slick-next i {margin-right: 3%; right: 0;}
+.slick-slide-close {position: absolute; right: 10px; top: 10px; padding: 0 10px 10px 10px; font-size: 32px; text-decoration: none; z-index: 150; opacity: 0.7; transition: all 0.3s;}
+    .slick-slide-close:hover { opacity: 1; }
+    .slick-slide-close i {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: rgba(0,0,0,.35);
+        font-size: 24px;
+        color: rgba(255,255,255,1.0);
+        text-shadow: 0 0 3px rgba(0,0,0,.7);
+        transition: all 0.3s;
+    }
+.slick-slide-close:hover i {  text-shadow: 0 0 6px rgba(0,0,0,.7);}
+
+.ws-carousel-wrapper { position: absolute; top: 0; left: 0; bottom: 0; right: 0; background: #222; color: #fff; }
+.ws-carousel .slick-initialized .slick-slide { display: flex; align-items: center; justify-content: center; }
+.ws-carousel .slick-initialized .slick-slide img { max-width: 100%; max-height: 100%; width: auto; }
+
+
+
+.mxb-wrapper { height: auto; overflow-y: visible; }
+.mxb-form-wrapper { box-shadow: none !important; border: 1px solid #ddd; }
+
+.form-embed { text-align: left; }
+.form-status { display: none; }
+.website-form {}
+.website-form input[type="text"].form-control, .website-form textarea.form-control { padding: 15px; font-size: 12px; }
+.website-form textarea.form-control { min-height: 115px; }
+.website-form textarea.tall.form-control { min-height: 248px; }
+.website-form select.form-control { padding: 15px; font-size: 12px; } 
+.website-form-button-row { text-align: center; margin-top: 20px;}
+.website-form-button.is-btn { display: inline-block; font-size: 12px; }
+
+.section-sizeable .is-container img { width: 100%; display: block; }
+.section-sizeable .is-container, .section-size-1 .is-container { width: 100%;  }
+.section-sizeable.section-size-2 .is-container { width: 70%; }
+.section-sizeable.section-size-3 .is-container { width: 50%; }
+
+@media screen and (max-width: 600px) {
+    .section-sizeable.section-size-2 .is-container { width: 100%; }
+    .section-sizeable.section-size-3 .is-container { width: 100%; }
+}
+
+.powered-by { position: fixed; bottom: 0; left: 0; right: 0; z-index: 99999; background: rgba(255,255,255,.9); box-shadow: 0 -10px 10px -5px rgba(0,0,0,.04); text-align: center; transition: all 0.3s; }
+.powered-by:hover { background: #ddac58; }
+.powered-by > a {
+    display: inline-block;    
+    padding: 3px 15px 5px 15px;
+    /*border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);*/
+    text-decoration: none;
+    font-size: 14px;
+    color: #888 !important;    
+    transition: all 0.3s;
+}
+.powered-by:hover a {  color: #eee !important; text-decoration: none; }
+.powered-by b { font-weight: bold; color: #555; transition: all 0.3s; }
+.powered-by:hover > a b { color: #fff; }
+
+@media screen and (max-width: 600px) {
+    .powered-by { /*left: 50px;*/ text-align: center; }
+
+}
+
+.ig-block-style-1 p.follow { text-align: center !important; text-transform: uppercase; font-size: 14px; padding: 0 15px; letter-spacing: .5px; }
+.ig-block-style-1 .instagram-block { position: relative; }
+.ig-block-style-1 .instagram-overlay { position: absolute; top: 0; left: 0; bottom: 0; right: 0; z-index: 2; pointer-events: none; display: flex; align-items: center; justify-content: center; }
+.ig-block-style-1 .instagram-username { display: inline-block; padding: 5px 15px; background: #eee; color: #333; font-size: 16px; }
+.ig-block-style-1 .instagram-username a { text-decoration: none; }
+.ig-block-style-1 .instagram-username a:hover { color: inherit !important; }
+
+.ig-block-style-1 .instagram-media ul {margin: 0 0 0 0; display: flex; flex-wrap: wrap; justify-content: left;}
+.ig-block-style-1 .instagram-media ul li { position: relative; box-sizing:border-box; width: 16.665%; padding-bottom: 16.665%; }
+.ig-block-style-1 .instagram-media ul li:nth-child(n+7) { display: none; }
+
+.ig-block-style-1 .instagram-media .wrapper {position: absolute; top: 0; left: 0; bottom: 0; right: 0; background: #fff;}
+.ig-block-style-1 .instagram-media li .cover {height: 100%; background-size: cover; }
+.ig-block-style-1 .lazyloaded { pointer-events: all; }
+.ig-block-style-1 .instagram-media li a > div:first-child {position: relative;}
+.ig-block-style-1 .instagram-media div.overlay {position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); opacity: .2; color: #fff; transition: opacity 0.3s;}
+.ig-block-style-1 .instagram-media div.overlay:hover {opacity: 1.0;}
+.ig-block-style-1 .instagram-media .overlay div {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 2px #222;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+.ig-block-style-1 .instagram-media .details {color: #fff; font-weight: 400; font-size: 26px; letter-spacing: 1px; text-align: center; width: 100%;
+                             position: absolute; top: 50%; transform: translateY(-50%); text-shadow: 0 0 2px #555; pointer-events: none;
+}
+.ig-block-style-1 .instagram-media .details > div { font-size: 12px;}
+
+
+.ig-block-style-2 .instagram-block { position: relative; }
+.ig-block-style-2 .instagram-overlay { position: absolute; top: 0; left: 0; bottom: 0; right: 0; z-index: 2; pointer-events: none; display: flex; flex-direction: column; text-align: center; align-items: center; justify-content: center;  background: rgba(0,0,0,.5); color: #fff; }
+.ig-block-style-2 .instagram-label { font-size: 20px; }
+.ig-block-style-2 .instagram-label i { display: block;  }
+.ig-block-style-2 .instagram-username { margin-top: -6px; font-size: 16px; }
+.ig-block-style-2 .instagram-username a { text-decoration: none; }
+.ig-block-style-2 .instagram-username a:hover { color: inherit !important; }
+
+.ig-block-style-2 .instagram-media ul {margin: 0 0 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: left;}
+.ig-block-style-2 .instagram-media ul li { position: relative; box-sizing:border-box; width: 20%; padding-bottom: 20%; }
+.ig-block-style-2 .instagram-media ul li:nth-child(n+6) { display: none; }
+
+.ig-block-style-2 .instagram-media .wrapper {position: absolute; top: 0; left: 0; bottom: 0; right: 0; background: #fff;}
+.ig-block-style-2 .instagram-media li .cover {height: 100%; background-size: cover; }
+.ig-block-style-2 .lazyloaded { pointer-events: all; }
+.ig-block-style-2 .instagram-media li a > div:first-child {position: relative;}
+.ig-block-style-2 .instagram-media div.overlay {position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); opacity: .2; color: #fff; transition: opacity 0.3s;}
+.ig-block-style-2 .instagram-media div.overlay:hover {opacity: 1.0;}
+.ig-block-style-2 .instagram-media .overlay div {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 2px #222;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.ig-block-style-3 p.follow { text-align: center !important; text-transform: uppercase; font-size: 14px; padding: 15px 0 5px 0; letter-spacing: .5px; }
+.ig-block-style-3 .instagram-block { position: relative; }
+.ig-block-style-3 .instagram-overlay { position: absolute; top: 0; left: 0; bottom: 0; right: 0; z-index: 2; pointer-events: none; display: flex; align-items: center; justify-content: center; }
+.ig-block-style-3 .instagram-username { display: block; padding: 15px 0; text-align: center; font-size: 16px; }
+.ig-block-style-3 .instagram-username a { text-decoration: none; }
+.ig-block-style-3 .instagram-username a:hover { color: inherit !important; }
+
+.ig-block-style-3 .instagram-media { display: flex; padding: 5px; }
+.ig-block-style-3 .instagram-media ul {margin: 0 0 0 0; display: flex; flex-wrap: wrap; justify-content: left;}
+.ig-block-style-3 .instagram-media ul li { position: relative; box-sizing:border-box; width: 33.333%; padding-bottom: 33.333%; }
+.ig-block-style-3 .instagram-media ul li:nth-child(n+7) { display: none; }
+
+.ig-block-style-3 .instagram-media .wrapper {position: absolute; top: 0; left: 0; bottom: 0; right: 0; background: #fff; padding: 5px;}
+.ig-block-style-3 .instagram-media li .cover {height: 100%; background-size: cover; }
+.ig-block-style-3 .lazyloaded { pointer-events: all; }
+.ig-block-style-3 .instagram-media li a > div:first-child {position: relative;}
+.ig-block-style-3 .instagram-media div.overlay {position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); opacity: .2; color: #fff; transition: opacity 0.3s;}
+.ig-block-style-3 .instagram-media div.overlay:hover {opacity: 1.0;}
+.ig-block-style-3 .instagram-media .overlay div {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-shadow: 0 0 2px #222;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.ig-block-style-3 .media-big { width: 40%; padding-bottom: 40%; position: relative; }
+.ig-block-style-3 .media-big .wrapper { margin: 5px; padding: 0;}
+.ig-block-style-3 .media-big .wrapper a { display: block; width: 100%; height: 100%; }
+.ig-block-style-3 .media-big .wrapper .cover { width: 100%; height: 100%; background-size: cover; }
+.ig-block-style-3 .media-big div.overlay { }
+.ig-block-style-3 .media-small { width: 60%; }
+
+@media screen and (max-width: 600px) {
+    .ig-block-style-1 .instagram-media ul li { width: 33.333%; padding-bottom: 33.333%; }
+    .ig-block-style-2 .instagram-media ul li { width: 33.333%; padding-bottom: 33.333%; }
+    .ig-block-style-2 .instagram-media ul li:nth-child(n+6) { display: block; }
+    .ig-block-style-2 .instagram-media ul li:nth-child(n+7) { display: none; }
+    .ig-block-style-3 .media-big { width: 33.333%; padding-bottom: 33.333%; }
+    .ig-block-style-3 .media-small { width: 66.667%; }
+    .ig-block-style-3 .instagram-media ul li { width: 50%; padding-bottom: 50%; }
+    .ig-block-style-3 .instagram-media ul li:nth-child(n+3) { display: none; }
+}
+/* 11/2026 Sticky header (Header > Sticky Header, WebsiteBuilder.GetHeaderClass): the menu stays at the top while the page scrolls.
+   Not with the transparent (absolute) header, which sits over the first block, or the side (Rainier) layout. */
+.header-sticky:not(.absolute-header):not(.header-rainier) .website-header,
+.header-sticky:not(.absolute-header):not(.header-rainier) .website-header-mobile { position: sticky; top: 0; z-index: 20; }
+
+
+/* 11/2026 Hero sections (block category "Heroes"; layouts = FsLayouts "Hero *", Handlebars in FsLayoutData). The ContentBox wrappers
+   around a hero get out of the way so the layout runs edge to edge. */
+.is-section:has(.is-hero-block) { padding: 0 !important; }
+.is-section .is-container.is-hero-block { max-width: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+.is-hero-block > .dynamic-data { display: block; }
+
+/* LF Hero sections (11/2026): one JSON (eyebrow, headline, text, buttons, 1-3 photos with focal points), six layouts.
+   Text styles come from the site's Font Editor (h1, .p-1, .p-3) and buttons from the palette (.is-btn.b1/.b2),
+   so a Style change restyles every layout. Photos use object-fit + the photographer's focal point. */
+.lf-hero { position: relative; width: 100%; min-height: 100vh; overflow: hidden; display: flex; }
+.lf-hero img.lf-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.lf-hero .lf-hero-copy { position: relative; z-index: 2; box-sizing: border-box; }
+/* the theme's phone rules align headings and paragraphs on their own; a hero keeps its layout's alignment */
+.lf-hero .lf-hero-copy h1, .lf-hero .lf-hero-copy p { text-align: inherit !important; }
+.lf-hero-cover .lf-hero-copy, .lf-hero-framed .lf-hero-copy, .lf-hero-trio .lf-hero-copy { text-align: center; }
+.lf-hero-editorial .lf-hero-copy, .lf-hero-split .lf-hero-copy, .lf-hero-overlap .lf-hero-copy { text-align: left; }
+.lf-hero .lf-hero-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: .78rem; margin: 0 0 1.1rem; opacity: .9; }
+.lf-hero h1 { margin: 0 0 1rem; line-height: 1.05; font-size: clamp(2.4rem, 5.2vw, 4.8rem); }
+.lf-hero .lf-hero-text { margin: 0 0 2rem; max-width: 34rem; font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.7; }
+.lf-hero .lf-hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.lf-hero .lf-hero-btns .is-btn { margin: 0; }
+/* optional parts: the template always writes them (Handlebars.Net can't test text), so empty ones are hidden here */
+.lf-hero .lf-hero-eyebrow:empty, .lf-hero .lf-hero-text:empty, .lf-hero .lf-hero-btns .is-btn:empty { display: none; }
+.lf-hero .lf-hero-btns:not(:has(.is-btn:not(:empty))) { display: none; }
+/* the theme sets paragraph margins with stronger selectors, so centred layouts centre their text block explicitly */
+.lf-hero-cover .lf-hero-copy .lf-hero-text, .lf-hero-framed .lf-hero-copy .lf-hero-text, .lf-hero-trio .lf-hero-copy .lf-hero-text { margin-left: auto !important; margin-right: auto !important; }
+.lf-hero .lf-hero-shade { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+/* cards that sit over a photo take the block's own palette background, passed down from .is-section */
+.is-section:has(.lf-hero) :is(.is-boxes, .is-box, .is-box-centered, .is-container, .row, .col-md-12, .dynamic-data, .lf-hero) { background-color: inherit; }
+.lf-hero.force-white .lf-hero-copy, .lf-hero.force-white .lf-hero-copy h1, .lf-hero.force-white .lf-hero-copy p { color: #fff !important; }
+
+/* 1 Cover: full-bleed photo, copy centred low, soft bottom shade */
+.lf-hero-cover { align-items: flex-end; justify-content: center; text-align: center; }
+.lf-hero-cover .lf-hero-shade { background: linear-gradient(to top, rgba(0,0,0,.62) 0%, rgba(0,0,0,.34) 50%, rgba(0,0,0,.16) 100%); }
+.lf-hero-cover .lf-hero-copy { padding: 0 6vw 12vh; max-width: 980px; }
+.lf-hero-cover .lf-hero-text { margin-left: auto; margin-right: auto; }
+.lf-hero-cover .lf-hero-btns { justify-content: center; }
+
+/* 2 Editorial: full-bleed photo, copy bottom-left with a thin rule */
+.lf-hero-editorial { align-items: flex-end; }
+.lf-hero-editorial .lf-hero-shade { background: linear-gradient(to right, rgba(0,0,0,.55) 0%, rgba(0,0,0,.15) 50%, rgba(0,0,0,0) 75%); }
+.lf-hero-editorial .lf-hero-copy { padding: 0 6vw 10vh; max-width: 760px; }
+.lf-hero-editorial .lf-hero-eyebrow::after { content: ""; display: block; width: 56px; height: 1px; background: currentColor; margin-top: 1.1rem; opacity: .7; }
+
+/* 3 Split: photo right (or left with .lf-hero-flip), copy on the block's own palette */
+.lf-hero-split { align-items: stretch; }
+.lf-hero-split .lf-hero-media { position: relative; flex: 0 0 56%; order: 2; }
+.lf-hero-split .lf-hero-copy { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; padding: 10vh 5vw; }
+.lf-hero-split h1, .lf-hero-overlap h1 { font-size: clamp(2.2rem, 3.4vw, 3.6rem); }
+.lf-hero-split.lf-hero-flip .lf-hero-media { order: 0; }
+
+/* 4 Framed: photo inset with a margin of the block colour, copy in a card overlapping its lower edge */
+.lf-hero-framed { flex-direction: column; align-items: center; padding: 3vw 3vw 0; box-sizing: border-box; }
+.lf-hero-framed .lf-hero-media { position: relative; width: 100%; flex: 1 1 auto; min-height: 62vh; }
+.lf-hero-framed .lf-hero-copy { margin: -14vh auto 0; width: min(720px, 88%); padding: 3.2rem 3rem 3rem; text-align: center; background: inherit; }
+.lf-hero-framed .lf-hero-text { margin-left: auto; margin-right: auto; }
+.lf-hero-framed .lf-hero-btns { justify-content: center; }
+
+/* 5 Overlap: tall photo on the left, copy card sliding over its right edge */
+.lf-hero-overlap { align-items: center; padding: 8vh 0; box-sizing: border-box; }
+.lf-hero-overlap .lf-hero-media { position: relative; flex: 0 0 58%; align-self: stretch; min-height: 80vh; }
+.lf-hero-overlap .lf-hero-copy { margin-left: -8vw; width: min(560px, 42vw); padding: 3.5rem 3rem; background: inherit; box-shadow: 0 30px 60px -30px rgba(0,0,0,.25); }
+
+/* 6 Trio: three portrait photos, copy centred above */
+.lf-hero-trio { flex-direction: column; align-items: center; justify-content: center; padding: 10vh 4vw 6vh; box-sizing: border-box; text-align: center; }
+.lf-hero-trio .lf-hero-copy { max-width: 820px; margin-bottom: 5vh; }
+.lf-hero-trio h1 { font-size: clamp(2.2rem, 4vw, 3.8rem); }
+.lf-hero-trio .lf-hero-text { margin-left: auto; margin-right: auto; }
+.lf-hero-trio .lf-hero-btns { justify-content: center; }
+.lf-hero-trio .lf-hero-row { display: grid; grid-template-columns: 1fr 1.25fr 1fr; gap: 2vw; width: 100%; max-width: 1300px; align-items: end; }
+.lf-hero-trio .lf-hero-media { position: relative; height: 44vh; }
+.lf-hero-trio .lf-hero-media:nth-child(2) { height: 54vh; }
+
+/* Phones: every layout stacks photo then copy; covers keep the photo behind the text */
+@media (max-width: 760px) {
+    .lf-hero { min-height: 0; }
+    .lf-hero-cover, .lf-hero-editorial { min-height: 88vh; }
+    .lf-hero-cover .lf-hero-copy, .lf-hero-editorial .lf-hero-copy { padding: 0 24px 9vh; }
+    .lf-hero-split, .lf-hero-overlap { flex-direction: column; padding: 0; }
+    .lf-hero-split .lf-hero-media, .lf-hero-overlap .lf-hero-media { order: 0; flex: none; height: 62vh; min-height: 0; width: 100%; }
+    .lf-hero-split .lf-hero-copy { padding: 40px 24px 48px; }
+    .lf-hero-overlap .lf-hero-copy { margin: -10vh 16px 32px; width: auto; padding: 32px 24px; }
+    .lf-hero-framed { padding: 16px 16px 0; }
+    .lf-hero-framed .lf-hero-media { min-height: 58vh; }
+    .lf-hero-framed .lf-hero-copy { margin-top: -8vh; width: 92%; padding: 28px 20px 32px; }
+    .lf-hero-trio { padding: 56px 16px 32px; }
+    .lf-hero-trio .lf-hero-row { grid-template-columns: 1fr 1fr; }
+    .lf-hero-trio .lf-hero-media { height: 34vh; }
+    .lf-hero-trio .lf-hero-media:nth-child(2) { grid-column: 1 / -1; grid-row: 1; height: 42vh; }
+}
+
+
+/* 11/2026 Packages sections (block category "Packages"; layouts = FsLayouts "Packages *"). The ContentBox wrappers step aside like for Heroes. */
+.is-section:has(.is-packages-block) { padding: 0 !important; }
+.is-section .is-container.is-packages-block { max-width: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+.is-packages-block > .dynamic-data { display: block; }
+
+/* LF Packages sections (11/2026): the Investment section done the Hero way. One JSON (head text, note, packages with photo, price,
+   details, description, includes, booking link), five layouts. Fonts from the Font Editor (h2/h3/.p-*), buttons from the palette. */
+.lf-pkgs { position: relative; box-sizing: border-box; padding: 11vh 6vw; max-width: 1400px; margin: 0 auto; font-size: 1rem; } /* box.css scales .is-section text down on phones; the Font Editor sizes (p-1...) still win */
+.lf-pkgs *, .lf-pkgs *::before, .lf-pkgs *::after { box-sizing: border-box; }
+.lf-pkgs .lf-pkgs-head { max-width: 760px; margin: 0 auto 7vh; text-align: center; }
+.lf-pkgs .lf-pkgs-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: .78rem; margin: 0 0 1rem; opacity: .85; }
+.lf-pkgs h2 { margin: 0 0 1rem; line-height: 1.1; font-size: clamp(2rem, 3.6vw, 3.4rem); }
+.lf-pkgs .lf-pkgs-text { margin: 0 auto; max-width: 36rem; line-height: 1.7; }
+.lf-pkgs .lf-pkgs-note { margin: 6vh auto 0; max-width: 40rem; text-align: center; font-style: italic; opacity: .85; }
+.lf-pkgs .lf-pkg-details { text-transform: uppercase; letter-spacing: .18em; font-size: .72rem; margin: 0 0 .6rem; opacity: .75; }
+.lf-pkgs .lf-pkg-name { margin: 0 0 .5rem; font-size: clamp(1.4rem, 2vw, 1.9rem); line-height: 1.2; }
+.lf-pkgs .lf-pkg-price { margin: 0 0 1.1rem; }
+.lf-pkgs .lf-pkg-pricenote { font-size: .8rem; text-transform: uppercase; letter-spacing: .14em; opacity: .75; }
+.lf-pkgs .lf-pkg-amount { font-size: 1.35rem; }
+.lf-pkgs .lf-pkg-desc { margin: 0 0 1.1rem; line-height: 1.7; }
+.lf-pkgs .lf-pkg-includes { list-style: none; margin: 0 0 1.6rem; padding: 0; }
+.lf-pkgs .lf-pkg-includes li { position: relative; padding: .45rem 0 .45rem 1.4rem; border-top: 1px solid rgba(127,127,127,.22); font-size: .95rem; }
+.lf-pkgs .lf-pkg-includes li::before { content: ""; position: absolute; left: 0; top: 1.05rem; width: .55rem; height: 1px; background: currentColor; opacity: .7; }
+.lf-pkgs .lf-pkg-btn .is-btn { margin: 0; }
+.lf-pkgs .lf-pkg-media { position: relative; overflow: hidden; }
+.lf-pkgs img.lf-pkg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* optional parts are always written (Handlebars.Net can't test text), so empty ones are hidden here */
+.lf-pkgs .lf-pkgs-eyebrow:empty, .lf-pkgs .lf-pkgs-text:empty, .lf-pkgs .lf-pkgs-note:empty, .lf-pkgs h2:empty,
+.lf-pkgs .lf-pkg-details:empty, .lf-pkgs .lf-pkg-desc:empty, .lf-pkgs .lf-pkg-pricenote:empty,
+.lf-pkgs .lf-pkg-btn a:empty { display: none; }
+.lf-pkgs .lf-pkg-price:not(:has(.lf-pkg-amount:not(:empty))) { display: none; }
+.lf-pkgs .lf-pkgs-head:not(:has(:not(:empty))) { display: none; }
+.lf-pkgs .lf-pkg-btn:not(:has(a:not(:empty))) { display: none; }
+/* the theme's phone rules align headings and paragraphs on their own; keep each layout's alignment */
+.lf-pkgs h2, .lf-pkgs h3, .lf-pkgs p { text-align: inherit !important; }
+.lf-pkgs .lf-pkgs-text, .lf-pkgs .lf-pkgs-note { margin-left: auto !important; margin-right: auto !important; }
+
+/* 1 Cards: photo-topped cards side by side */
+.lf-pkgs-cards .lf-pkgs-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 3vw; align-items: stretch; }
+.lf-pkgs-cards .lf-pkg { text-align: center; }
+.lf-pkgs-cards .lf-pkg-media { aspect-ratio: 4 / 5; margin-bottom: 1.8rem; }
+/* centred cards and columns: centred "includes" without the dash, and buttons lined up along the bottom */
+.lf-pkgs-cards .lf-pkg, .lf-pkgs-columns .lf-pkg { display: flex; flex-direction: column; }
+.lf-pkgs-cards .lf-pkg-body, .lf-pkgs-columns .lf-pkg-body { flex: 1 1 auto; display: flex; flex-direction: column; }
+.lf-pkgs-cards .lf-pkg-btn, .lf-pkgs-columns .lf-pkg-btn { margin-top: auto; }
+.lf-pkgs-cards .lf-pkg-includes li, .lf-pkgs-columns .lf-pkg-includes li { padding-left: 0; text-align: center; }
+.lf-pkgs-cards .lf-pkg-includes li::before, .lf-pkgs-columns .lf-pkg-includes li::before { display: none; }
+
+/* 2 Rows: editorial rows, photo and text alternating sides */
+.lf-pkgs-rows .lf-pkgs-list { display: flex; flex-direction: column; gap: 9vh; }
+.lf-pkgs-rows .lf-pkg { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; align-items: center; }
+.lf-pkgs-rows .lf-pkg-media { aspect-ratio: 4 / 5; }
+.lf-pkgs-rows .lf-pkg:nth-child(even) .lf-pkg-media { order: 2; }
+.lf-pkgs-rows .lf-pkg:not(:has(.lf-pkg-media)) { grid-template-columns: 1fr; max-width: 680px; margin: 0 auto; }
+.lf-pkgs-rows .lf-pkg-name { font-size: clamp(1.8rem, 3vw, 2.8rem); }
+
+/* 3 Columns: no photos, quiet columns with hairline dividers, price set large */
+.lf-pkgs-columns .lf-pkgs-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.lf-pkgs-columns .lf-pkg { padding: 1rem 2.6vw 1.5rem; text-align: center; border-left: 1px solid rgba(127,127,127,.28); }
+.lf-pkgs-columns .lf-pkg:first-child { border-left: 0; }
+.lf-pkgs-columns .lf-pkg-amount { display: block; font-size: clamp(2rem, 3vw, 2.8rem); margin-top: .4rem; }
+
+/* 4 Menu: a price list, name ..... price */
+.lf-pkgs-menu .lf-pkgs-list { max-width: 860px; margin: 0 auto; }
+.lf-pkgs-menu .lf-pkg { padding: 1.8rem 0; border-top: 1px solid rgba(127,127,127,.25); }
+.lf-pkgs-menu .lf-pkg:first-child { border-top: 0; }
+.lf-pkgs-menu .lf-pkg-line { display: flex; align-items: baseline; gap: 1rem; }
+.lf-pkgs-menu .lf-pkg-line .lf-pkg-name { margin: 0; flex: 0 1 auto; }
+.lf-pkgs-menu .lf-pkg-dots { flex: 1 1 auto; border-bottom: 1px dotted currentColor; opacity: .45; transform: translateY(-.35em); min-width: 2rem; }
+.lf-pkgs-menu .lf-pkg-line .lf-pkg-price { margin: 0; flex: 0 0 auto; white-space: nowrap; }
+.lf-pkgs-menu .lf-pkg-details { margin: .5rem 0 .4rem; }
+.lf-pkgs-menu .lf-pkg-desc { margin-bottom: .6rem; max-width: 40rem; }
+.lf-pkgs-menu .lf-pkg-includes { display: flex; flex-wrap: wrap; gap: 0 1.6rem; margin-bottom: .8rem; }
+.lf-pkgs-menu .lf-pkg-includes li { border-top: 0; padding: .15rem 0 .15rem 1.1rem; font-size: .9rem; }
+.lf-pkgs-menu .lf-pkg-includes li::before { top: .8rem; width: .45rem; }
+.lf-pkgs-menu .lf-pkg-link { font-size: .8rem; text-transform: uppercase; letter-spacing: .16em; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+
+/* 5 Split: intro + one big photo on the left, the packages listed on the right */
+.lf-pkgs-split { display: grid; grid-template-columns: 5fr 6fr; gap: 6vw; align-items: start; }
+.lf-pkgs-split .lf-pkgs-aside { position: sticky; top: 4vh; }
+.lf-pkgs-split .lf-pkgs-head { text-align: left; margin: 0 0 2.5rem; }
+.lf-pkgs-split .lf-pkgs-text, .lf-pkgs-split .lf-pkgs-note { margin-left: 0 !important; text-align: left; }
+.lf-pkgs-split .lf-pkgs-media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+.lf-pkgs-split .lf-pkgs-note { margin-top: 2rem; }
+.lf-pkgs-split .lf-pkg { padding: 0 0 2.6rem; margin-bottom: 2.6rem; border-bottom: 1px solid rgba(127,127,127,.25); }
+.lf-pkgs-split .lf-pkg:last-child { border-bottom: 0; margin-bottom: 0; }
+
+@media (max-width: 760px) {
+    .lf-pkgs { padding: 64px 22px; }
+    .lf-pkgs .lf-pkgs-head { margin-bottom: 40px; }
+    .lf-pkgs-cards .lf-pkgs-list { gap: 48px; }
+    .lf-pkgs-rows .lf-pkg { grid-template-columns: 1fr; gap: 24px; }
+    .lf-pkgs-rows .lf-pkg:nth-child(even) .lf-pkg-media { order: 0; }
+    .lf-pkgs-columns .lf-pkg { border-left: 0; border-top: 1px solid rgba(127,127,127,.28); padding: 32px 4px; }
+    .lf-pkgs-columns .lf-pkg:first-child { border-top: 0; }
+    .lf-pkgs-menu .lf-pkg-line { flex-wrap: wrap; }
+    .lf-pkgs-menu .lf-pkg-dots { display: none; }
+    .lf-pkgs-split { grid-template-columns: 1fr; gap: 40px; }
+    .lf-pkgs-split .lf-pkgs-aside { position: static; }
+}
+
+
+/* 11/2026 Portfolio sections (block category "Portfolio"; layouts = FsLayouts "Portfolio *"). The ContentBox wrappers step aside like for Heroes. */
+.is-section:has(.is-portfolio-block) { padding: 0 !important; }
+.is-section .is-container.is-portfolio-block { max-width: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+.is-portfolio-block > .dynamic-data { display: block; }
+
+/* LF Portfolio sections (11/2026): curated photos (Website photos gallery or picked) and gallery "stories", five layouts.
+   Fonts from the Font Editor (h2/.p-*), buttons from the palette. Photos keep the gallery focal point (object-position). */
+.lf-pf { position: relative; box-sizing: border-box; padding: 11vh 4vw; max-width: 1500px; margin: 0 auto; font-size: 1rem; } /* box.css shrinks .is-section text on phones */
+.lf-pf *, .lf-pf *::before, .lf-pf *::after { box-sizing: border-box; }
+.lf-pf .lf-pf-head { max-width: 760px; margin: 0 auto 6vh; text-align: center; }
+.lf-pf .lf-pf-eyebrow { text-transform: uppercase; letter-spacing: .22em; font-size: .78rem; margin: 0 0 1rem; opacity: .85; }
+.lf-pf h2 { margin: 0 0 1rem; line-height: 1.1; font-size: clamp(2rem, 3.6vw, 3.4rem); }
+.lf-pf .lf-pf-text { margin: 0 auto !important; max-width: 36rem; line-height: 1.7; }
+.lf-pf h2, .lf-pf h3, .lf-pf p { text-align: inherit !important; }
+.lf-pf figure { margin: 0; position: relative; overflow: hidden; }
+.lf-pf img.lf-pf-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.22,.61,.36,1); }
+.lf-pf .lf-pf-item:hover img.lf-pf-img, .lf-pf .lf-pf-story:hover img.lf-pf-img { transform: scale(1.03); }
+.lf-pf .lf-pf-btn { text-align: center; margin-top: 6vh; }
+.lf-pf .lf-pf-btn .is-btn { margin: 0; }
+
+/* optional parts are always written (Handlebars.Net can't test text), so empty ones are hidden here */
+.lf-pf .lf-pf-eyebrow:empty, .lf-pf h2:empty, .lf-pf .lf-pf-text:empty, .lf-pf .lf-pf-caption:empty, .lf-pf .lf-pf-story-note:empty, .lf-pf .lf-pf-btn a:empty { display: none; }
+.lf-pf .lf-pf-head:not(:has(:not(:empty))) { display: none; }
+.lf-pf .lf-pf-btn:not(:has(a:not(:empty))) { display: none; }
+
+/* 1 Mosaic: an asymmetric collage that repeats every 7 photos */
+.lf-pf-mosaic .lf-pf-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 15vw; gap: 10px; }
+.lf-pf-mosaic .lf-pf-item:nth-child(7n+1) { grid-column: span 2; grid-row: span 2; }
+.lf-pf-mosaic .lf-pf-item:nth-child(7n+4) { grid-row: span 2; }
+.lf-pf-mosaic .lf-pf-item:nth-child(7n+6) { grid-column: span 2; }
+
+/* 2 Editorial: big and small photos stepping down the page, with small captions */
+.lf-pf-editorial .lf-pf-grid { display: grid; grid-template-columns: repeat(12, 1fr); row-gap: 7vh; column-gap: 2vw; align-items: start; }
+.lf-pf-editorial .lf-pf-item { aspect-ratio: 4 / 5; }
+.lf-pf-editorial .lf-pf-item:nth-child(4n+1) { grid-column: 1 / span 7; aspect-ratio: 4 / 3; }
+.lf-pf-editorial .lf-pf-item:nth-child(4n+2) { grid-column: 9 / span 4; margin-top: 18vh; }
+.lf-pf-editorial .lf-pf-item:nth-child(4n+3) { grid-column: 2 / span 4; }
+.lf-pf-editorial .lf-pf-item:nth-child(4n+4) { grid-column: 7 / span 6; aspect-ratio: 3 / 2; margin-top: 12vh; }
+.lf-pf-editorial figure { overflow: visible; }
+.lf-pf-editorial figure img.lf-pf-img { position: relative; display: block; aspect-ratio: inherit; height: auto; }
+.lf-pf-editorial .lf-pf-caption { margin: .8rem 0 0; text-transform: uppercase; letter-spacing: .16em; font-size: .72rem; opacity: .75; } /* a <p class="p-3"> so the palette colours it (a figcaption isn't) */
+
+/* 3 Filmstrip: one swipeable row of tall photos */
+.lf-pf-filmstrip { max-width: none; padding-left: 0; padding-right: 0; }
+.lf-pf-filmstrip .lf-pf-head { padding: 0 6vw; }
+.lf-pf-filmstrip .lf-pf-grid { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 6vw 12px; scrollbar-width: thin; }
+.lf-pf-filmstrip .lf-pf-item { flex: 0 0 auto; height: 62vh; aspect-ratio: 2 / 3; scroll-snap-align: center; }
+.lf-pf-filmstrip .lf-pf-item:nth-child(3n+2) { aspect-ratio: 3 / 2; }
+
+/* 4 Columns: an even masonry wall, every photo at its own shape */
+.lf-pf-columns .lf-pf-grid { columns: 3 280px; column-gap: 12px; }
+.lf-pf-columns .lf-pf-item { break-inside: avoid; margin-bottom: 12px; aspect-ratio: 4 / 5; }
+.lf-pf-columns .lf-pf-item:nth-child(3n+2) { aspect-ratio: 1 / 1; }
+.lf-pf-columns .lf-pf-item:nth-child(5n+3) { aspect-ratio: 3 / 4; }
+
+/* 5 Stories: gallery cards linking to the photographer's galleries */
+.lf-pf-stories .lf-pf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 4vh 2.4vw; }
+.lf-pf-stories .lf-pf-story { display: block; text-decoration: none; color: inherit; text-align: center; }
+.lf-pf-stories .lf-pf-cover { display: block; position: relative; overflow: hidden; aspect-ratio: 4 / 5; margin-bottom: 1.1rem; }
+.lf-pf-stories .lf-pf-story-name { display: block; margin: 0; font-size: 1.35rem; line-height: 1.25; } /* h3 + p.p-3: palette heading/paragraph colours */
+.lf-pf-stories .lf-pf-story-note { display: block; margin: .35rem 0 0 !important; text-transform: uppercase; letter-spacing: .16em; font-size: .72rem; opacity: .75; }
+
+@media (max-width: 760px) {
+    .lf-pf { padding: 64px 16px; }
+    .lf-pf .lf-pf-head { margin-bottom: 36px; }
+    .lf-pf-mosaic .lf-pf-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 38vw; gap: 6px; }
+    .lf-pf-mosaic .lf-pf-item:nth-child(7n+6) { grid-column: span 1; }
+    .lf-pf-editorial .lf-pf-grid { grid-template-columns: 1fr 1fr; row-gap: 24px; column-gap: 10px; }
+    .lf-pf-editorial .lf-pf-item:nth-child(n) { grid-column: auto; margin-top: 0; aspect-ratio: 4 / 5; }
+    .lf-pf-editorial .lf-pf-item:nth-child(4n+1) { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+    .lf-pf-filmstrip .lf-pf-item { height: 56vh; }
+    .lf-pf-columns .lf-pf-grid { columns: 2; column-gap: 6px; }
+    .lf-pf-columns .lf-pf-item { margin-bottom: 6px; }
+}
+
+/* 11/2026 Style tokens (Design > Sections & Photos, and every Style sets them; WebsiteBuilder.GetHeaderClass adds the classes).
+   Section edges: each block after the first slides up over the one above by --lf-edge and masks its own top edge into the
+   shape, so the edge is drawn in that block's own colour or photo. Blocks of the same colour simply meet as before. */
+.website-wrapper { --lf-edge: clamp(28px, 4.5vw, 72px); }
+.divider-wave .is-wrapper > .is-section ~ .is-section,
+.divider-curve .is-wrapper > .is-section ~ .is-section,
+.divider-angle .is-wrapper > .is-section ~ .is-section {
+    position: relative; margin-top: calc(-1 * var(--lf-edge));
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: top, bottom; mask-position: top, bottom;
+    -webkit-mask-size: 100% var(--lf-edge), 100% calc(100% - var(--lf-edge) + 1px); mask-size: 100% var(--lf-edge), 100% calc(100% - var(--lf-edge) + 1px);
+}
+.divider-wave .is-wrapper > .is-section ~ .is-section {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 55C240 100 480 100 720 55S1200 10 1440 55V100H0Z'/%3E%3C/svg%3E"), linear-gradient(#000, #000);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 55C240 100 480 100 720 55S1200 10 1440 55V100H0Z'/%3E%3C/svg%3E"), linear-gradient(#000, #000);
+}
+.divider-curve .is-wrapper > .is-section ~ .is-section {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 100Q720-60 1440 100Z'/%3E%3C/svg%3E"), linear-gradient(#000, #000);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 100Q720-60 1440 100Z'/%3E%3C/svg%3E"), linear-gradient(#000, #000);
+}
+.divider-angle .is-wrapper > .is-section ~ .is-section {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 100L1440 0V100Z'/%3E%3C/svg%3E"), linear-gradient(#000, #000);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 100L1440 0V100Z'/%3E%3C/svg%3E"), linear-gradient(#000, #000);
+}
+
+/* LF's own blocks get room for the edge that overlaps them, so photos aren't cut (full-bleed heroes don't: the edge cuts the photo, as intended) */
+.divider-wave .is-wrapper > .is-section:not(:last-child) .dynamic-data:has(> .lf-hero-trio, > .lf-hero-framed, > .lf-hero-overlap, > .lf-pkgs, > .lf-pf, > .lf-col)::after,
+.divider-curve .is-wrapper > .is-section:not(:last-child) .dynamic-data:has(> .lf-hero-trio, > .lf-hero-framed, > .lf-hero-overlap, > .lf-pkgs, > .lf-pf, > .lf-col)::after,
+.divider-angle .is-wrapper > .is-section:not(:last-child) .dynamic-data:has(> .lf-hero-trio, > .lf-hero-framed, > .lf-hero-overlap, > .lf-pkgs, > .lf-pf, > .lf-col)::after { content: ""; display: block; height: var(--lf-edge); }
+
+/* Photo corners: framed photos in Hero, Packages and Portfolio blocks, and photos placed in ordinary blocks. Full-width photos
+   (block backgrounds, Hero Cover/Editorial/Split), gallery and directory grids, sliders, testimonials and logos (svg/png) stay square. */
+.frame-rounded, .frame-soft { --lf-frame: 14px; --lf-frame-top: 14px; }
+.frame-arch { --lf-frame: 0; --lf-frame-top: 50% 50% 0 0 / 30% 30% 0 0; }
+.frame-soft { --lf-frame-shadow: 0 22px 44px -24px rgba(0, 0, 0, .45); }
+.frame-rounded .lf-hero-framed .lf-hero-media, .frame-rounded .lf-hero-overlap .lf-hero-media, .frame-rounded .lf-hero-trio .lf-hero-media,
+.frame-rounded .lf-pkgs .lf-pkg-media, .frame-rounded .lf-pf-stories .lf-pf-cover, .frame-rounded .lf-pf-editorial figure img.lf-pf-img,
+.frame-soft .lf-hero-framed .lf-hero-media, .frame-soft .lf-hero-overlap .lf-hero-media, .frame-soft .lf-hero-trio .lf-hero-media,
+.frame-soft .lf-pkgs .lf-pkg-media, .frame-soft .lf-pf-stories .lf-pf-cover, .frame-soft .lf-pf-editorial figure img.lf-pf-img,
+.frame-arch .lf-hero-framed .lf-hero-media, .frame-arch .lf-hero-overlap .lf-hero-media, .frame-arch .lf-hero-trio .lf-hero-media,
+.frame-arch .lf-pkgs .lf-pkg-media, .frame-arch .lf-pf-stories .lf-pf-cover, .frame-arch .lf-pf-editorial figure img.lf-pf-img {
+    border-radius: var(--lf-frame-top); overflow: hidden; box-shadow: var(--lf-frame-shadow, none);
+}
+.frame-rounded .is-section .is-container img:not([src*=".svg"]):not([src*=".png"]):not(.is-overlay img):not(.is-gallery-grid img):not(.is-directory-grid img):not(.thumb-masonry img):not(.thumb-justified img):not(.justified-gallery img):not(.slick-slider img):not(.slider-on-box img):not(.instagram-media img):not(.testimonial-widget img):not(.lf-hero img):not(.lf-pkgs img):not(.lf-pf img):not(.lf-col img),
+.frame-soft .is-section .is-container img:not([src*=".svg"]):not([src*=".png"]):not(.is-overlay img):not(.is-gallery-grid img):not(.is-directory-grid img):not(.thumb-masonry img):not(.thumb-justified img):not(.justified-gallery img):not(.slick-slider img):not(.slider-on-box img):not(.instagram-media img):not(.testimonial-widget img):not(.lf-hero img):not(.lf-pkgs img):not(.lf-pf img):not(.lf-col img),
+.frame-arch .is-section .is-container img:not([src*=".svg"]):not([src*=".png"]):not(.is-overlay img):not(.is-gallery-grid img):not(.is-directory-grid img):not(.thumb-masonry img):not(.thumb-justified img):not(.justified-gallery img):not(.slick-slider img):not(.slider-on-box img):not(.instagram-media img):not(.testimonial-widget img):not(.lf-hero img):not(.lf-pkgs img):not(.lf-pf img):not(.lf-col img) {
+    border-radius: var(--lf-frame-top); box-shadow: var(--lf-frame-shadow, none);
+}
+/* tight photo walls (Portfolio Mosaic, Filmstrip, Columns) only round their corners: no shadow, and arch becomes a small radius */
+.frame-rounded .lf-pf-grid > .lf-pf-item, .frame-soft .lf-pf-grid > .lf-pf-item, .frame-arch .lf-pf-grid > .lf-pf-item { border-radius: var(--lf-frame, 0); }
+.frame-arch .lf-pf-grid > .lf-pf-item { border-radius: 10px; }
+.frame-rounded .lf-pf-editorial .lf-pf-grid > .lf-pf-item, .frame-soft .lf-pf-editorial .lf-pf-grid > .lf-pf-item, .frame-arch .lf-pf-editorial .lf-pf-grid > .lf-pf-item { border-radius: 0; }
+
+/* 11/2026 Collage: the ContentBox wrappers around a Collage get out of the way so the layout runs edge to edge (as Hero / Packages) */
+.is-section:has(.is-collage-block) { padding: 0 !important; }
+.is-section .is-container.is-collage-block { max-width: none !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+.is-collage-block > .dynamic-data { display: block; }
+/* 11/2026 Collage sections (block category "Collage"; layouts = FsLayouts "Collage *", Handlebars in FsLayoutData). Layered photo
+   compositions: overlaps are CSS grid cells sharing space (no absolute positioning on phones), so each layout restacks by itself.
+   Cards and frames use background: inherit, which is the section's palette background (.pal-* on the wrapper). */
+.is-section:has(.lf-col) :is(.is-boxes, .is-box, .is-box-centered, .is-container, .row, .col-md-12, .dynamic-data, .lf-col) { background-color: inherit; }
+.lf-col { position: relative; box-sizing: border-box; width: 100%; padding: clamp(64px, 9vw, 128px) 6vw; font-size: 1rem; }
+.lf-col *, .lf-col *::before, .lf-col *::after { box-sizing: border-box; }
+.lf-col .lf-col-ph { position: relative; overflow: hidden; }
+/* cards, frames and captions take the section's colour through every wrapper (background: inherit only reads the parent) */
+.lf-col :is(.lf-col-media, .lf-col-row, .lf-col-tile, .lf-col-copy) { background-color: inherit; }
+.lf-col img.lf-col-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.lf-col .lf-col-copy { position: relative; z-index: 2; }
+.lf-col .lf-col-copy h2, .lf-col .lf-col-copy p { text-align: inherit !important; } /* the theme centres headings on phones */
+.lf-col-tiles .lf-col-text, .lf-col-mosaic .lf-col-text, .lf-col-scatter .lf-col-text { margin-left: auto !important; margin-right: auto !important; }
+.lf-col-mosaic .lf-col-copy, .lf-col-tiles .lf-col-copy, .lf-col-scatter .lf-col-copy { text-align: center; }
+.lf-col .lf-col-eyebrow { margin: 0 0 1rem !important; text-transform: uppercase; letter-spacing: .24em; font-size: .74rem; opacity: .85; }
+/* the accent line: the Style's script font (--lf-accent-font), else the heading font in italics */
+.lf-col .lf-col-accent { margin: 0 0 .2rem !important; font-style: italic; font-size: var(--lf-accent-size, clamp(1.5rem, 2.2vw, 2rem)); line-height: 1.1; letter-spacing: 0; text-transform: none; }
+.lf-col h2.lf-col-headline { margin: 0 0 1.4rem !important; font-size: clamp(2rem, 3.6vw, 3.4rem); line-height: 1.08; }
+.lf-col .lf-col-text { margin: 0 0 2rem !important; max-width: 34rem; line-height: 1.75; font-size: clamp(.98rem, 1.1vw, 1.08rem); }
+.lf-col .lf-col-btns .is-btn { margin: 0; }
+.lf-col .lf-col-eyebrow:empty, .lf-col .lf-col-accent:empty, .lf-col h2.lf-col-headline:empty, .lf-col .lf-col-text:empty,
+.lf-col .lf-col-label:empty, .lf-col .lf-col-handwritten:empty { display: none; }
+.lf-col .lf-col-btns:not(:has(.is-btn:not(:empty))) { display: none; }
+
+/* 1 Offset: a tall photo, a second one framed over its lower corner, a hairline box behind */
+.lf-col-offset { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 7vw; align-items: center; }
+.lf-col-offset .lf-col-media { display: grid; grid-template-columns: repeat(10, 1fr); grid-template-rows: repeat(10, minmax(0, 1fr)); aspect-ratio: 5 / 6; }
+.lf-col-offset .lf-col-ph1 { grid-column: 1 / 8; grid-row: 1 / 9; }
+.lf-col-offset .lf-col-media::before { content: ""; grid-column: 2 / 9; grid-row: 2 / 10; border: 1px solid currentColor; opacity: .35; }
+.lf-col-offset .lf-col-ph2 { grid-column: 6 / 11; grid-row: 5 / 11; z-index: 1; border: 12px solid transparent; background: inherit; background-clip: border-box; }
+.lf-col-offset .lf-col-ph2 img { height: 100%; }
+.lf-col-offset .lf-col-ph2:only-child, .lf-col-offset .lf-col-ph1:only-child { grid-column: 1 / 10; grid-row: 1 / 11; }
+
+/* 2 Card: a wide photo, the words on a card across its right edge */
+.lf-col-card { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: center; }
+.lf-col-card .lf-col-media { grid-column: 1 / 10; grid-row: 1; }
+.lf-col-card .lf-col-media .lf-col-ph { aspect-ratio: 16 / 10; }
+.lf-col-card .lf-col-copy { grid-column: 8 / 13; grid-row: 1; padding: clamp(2rem, 4vw, 4rem); background: inherit; box-shadow: 0 30px 70px -40px rgba(0, 0, 0, .35); }
+
+/* 3 Mosaic: tall | two stacked | tall, the words on a panel over the middle */
+.lf-col-mosaic { display: grid; grid-template-columns: 1fr 1.25fr 1fr; grid-template-rows: repeat(10, minmax(0, 1fr)); gap: 14px; height: clamp(780px, 120vh, 1100px); }
+.lf-col-mosaic .lf-col-ph1 { grid-column: 1; grid-row: 1 / 11; }
+.lf-col-mosaic .lf-col-ph2 { grid-column: 2; grid-row: 1 / 7; }
+.lf-col-mosaic .lf-col-ph3 { grid-column: 3; grid-row: 1 / 5; }
+.lf-col-mosaic .lf-col-ph4 { grid-column: 3; grid-row: 5 / 11; }
+.lf-col-mosaic .lf-col-copy { grid-column: 2; grid-row: 6 / 11; align-self: end; margin: 0 6%; padding: clamp(1.6rem, 2.6vw, 2.6rem); text-align: center; box-shadow: 0 24px 60px -36px rgba(0, 0, 0, .4); }
+.lf-col-mosaic .lf-col-text { margin-left: auto; margin-right: auto; }
+.lf-col-mosaic h2.lf-col-headline { font-size: clamp(1.7rem, 2.6vw, 2.6rem); }
+
+/* 4 Tiles: centred heading, then three portrait photos with their captions across the bottom edge */
+.lf-col-tiles .lf-col-copy { text-align: center; margin: 0 auto 3.5rem; max-width: 720px; }
+.lf-col-tiles .lf-col-text { margin-left: auto; margin-right: auto; }
+.lf-col-tiles .lf-col-accent { position: relative; z-index: 1; }
+/* a big script line tucks into the heading below it (plain italics don't) */
+:is(.accent-allura, .accent-pinyon, .accent-sacramento, .accent-caveat) .lf-col-tiles .lf-col-accent { font-size: var(--lf-accent-size-lg); margin-bottom: -.25em !important; }
+.lf-col-tiles .lf-col-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 36px); max-width: 1180px; margin: 0 auto; }
+.lf-col-tiles .lf-col-tile { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; }
+.lf-col-tiles .lf-col-tile .lf-col-ph { width: 100%; aspect-ratio: 3 / 4; }
+.lf-col-tiles .lf-col-tile img { transition: transform .8s ease; }
+.lf-col-tiles .lf-col-tile:hover img { transform: scale(1.04); }
+.lf-col-tiles .lf-col-label { position: relative; z-index: 1; margin: -1.6rem 0 0 !important; min-width: 62%; padding: .95rem 1.4rem; text-align: center; text-transform: uppercase; letter-spacing: .2em; font-size: .78rem; background: inherit; }
+.lf-col-tiles .lf-col-tile { background: inherit; }
+.lf-col-tiles .lf-col-tile[href=""], .lf-col-tiles .lf-col-tile[href="#"] { pointer-events: none; } /* a photo without a link is just a photo */
+
+/* 5 Polaroid: a white-bordered print, tilted, another photo behind it; the caption handwritten on the print */
+.lf-col-polaroid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 7vw; align-items: center; }
+.lf-col-polaroid .lf-col-media { display: grid; grid-template-columns: repeat(10, 1fr); grid-template-rows: repeat(10, minmax(0, 1fr)); aspect-ratio: 1 / 1; }
+.lf-col-polaroid .lf-col-back { grid-column: 5 / 11; grid-row: 1 / 7; transform: rotate(4deg); box-shadow: 0 20px 40px -24px rgba(0, 0, 0, .45); }
+.lf-col-polaroid .lf-col-print { grid-column: 1 / 8; grid-row: 3 / 11; z-index: 1; margin: 0; padding: 14px 14px 0; background: #fff; transform: rotate(-3.5deg); box-shadow: 0 26px 50px -24px rgba(0, 0, 0, .5); display: flex; flex-direction: column; }
+.lf-col-polaroid .lf-col-print .lf-col-ph { flex: 1 1 auto; min-height: 0; }
+.lf-col-polaroid .lf-col-handwritten { margin: 0 !important; padding: .55rem 0 .75rem; min-height: 3.2rem; text-align: center; color: #3a3631 !important; font-style: italic; font-size: clamp(1.3rem, 1.9vw, 1.8rem); line-height: 1.2; }
+.lf-col-polaroid .lf-col-print:has(.lf-col-handwritten:empty) { padding-bottom: 3.2rem; }
+
+/* 6 Scatter: the words in the middle, up to five photos set around them at different sizes */
+.lf-col-scatter { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(12, minmax(0, 1fr)); height: clamp(680px, 104vh, 960px); gap: 0 18px; }
+.lf-col-scatter .lf-col-ph1 { grid-column: 1 / 4; grid-row: 1 / 6; }
+.lf-col-scatter .lf-col-ph2 { grid-column: 10 / 13; grid-row: 2 / 5; }
+.lf-col-scatter .lf-col-ph3 { grid-column: 2 / 4; grid-row: 8 / 12; }
+.lf-col-scatter .lf-col-ph4 { grid-column: 10 / 12; grid-row: 7 / 12; }
+.lf-col-scatter .lf-col-ph5 { grid-column: 7 / 9; grid-row: 10 / 13; }
+.lf-col-scatter .lf-col-copy { grid-column: 4 / 10; grid-row: 2 / 10; align-self: center; justify-self: center; max-width: 520px; padding: 1rem; text-align: center; }
+.lf-col-scatter .lf-col-text { margin-left: auto; margin-right: auto; }
+.lf-col-scatter h2.lf-col-headline { font-size: clamp(2.2rem, 4.2vw, 4rem); }
+
+/* phones and narrow tablets: everything stacks; the overlaps become small, safe ones */
+@media (max-width: 860px) {
+    .lf-col { padding: 64px 22px; }
+    .lf-col-offset, .lf-col-polaroid { grid-template-columns: 1fr; gap: 44px; }
+    .lf-col-card { grid-template-columns: 1fr; }
+    .lf-col-card .lf-col-media { grid-column: 1; grid-row: 1; }
+    .lf-col-card .lf-col-copy { grid-column: 1; grid-row: 2; margin: -48px 18px 0; padding: 2rem 1.6rem; }
+    .lf-col-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: none; grid-auto-rows: 46vw; height: auto; gap: 8px; }
+    .lf-col-mosaic .lf-col-ph1, .lf-col-mosaic .lf-col-ph2, .lf-col-mosaic .lf-col-ph3, .lf-col-mosaic .lf-col-ph4 { grid-column: auto; grid-row: auto; }
+    .lf-col-mosaic .lf-col-copy { grid-column: 1 / 3; grid-row: 1; margin: 0; box-shadow: none; padding: 0 0 1.6rem; }
+    .lf-col-tiles .lf-col-row { grid-template-columns: 1fr; gap: 36px; }
+    .lf-col-tiles .lf-col-tile .lf-col-ph { aspect-ratio: 4 / 5; }
+    .lf-col-scatter { grid-template-columns: repeat(6, 1fr); grid-template-rows: none; grid-auto-rows: 26vw; height: auto; gap: 10px; }
+    .lf-col-scatter .lf-col-copy { grid-column: 1 / 7; grid-row: 1; padding: 0 0 1.4rem; }
+    .lf-col-scatter .lf-col-ph1 { grid-column: 1 / 4; grid-row: 2 / 4; }
+    .lf-col-scatter .lf-col-ph2 { grid-column: 4 / 7; grid-row: 2 / 3; }
+    .lf-col-scatter .lf-col-ph3 { grid-column: 4 / 7; grid-row: 3 / 4; }
+    .lf-col-scatter .lf-col-ph4 { grid-column: 1 / 5; grid-row: 4 / 6; }
+    .lf-col-scatter .lf-col-ph5 { grid-column: 5 / 7; grid-row: 4 / 6; }
+}
+
+/* accent scripts a Style can set (FsWebSiteProperties.AccentFont -> wrapper class accent-*; WebsiteBuilder.AccentFontLink loads the
+   Google font). Without one, accent lines stay in the site's own font, in italics */
+.accent-allura { --lf-accent-font: 'Allura', cursive; --lf-accent-size: clamp(2.1rem, 3vw, 2.8rem); --lf-accent-size-lg: clamp(2.8rem, 4.6vw, 4.4rem); }
+.accent-pinyon { --lf-accent-font: 'Pinyon Script', cursive; --lf-accent-size: clamp(1.8rem, 2.6vw, 2.4rem); --lf-accent-size-lg: clamp(2.4rem, 4vw, 3.8rem); }
+.accent-sacramento { --lf-accent-font: 'Sacramento', cursive; --lf-accent-size: clamp(2.2rem, 3.2vw, 3rem); --lf-accent-size-lg: clamp(3rem, 5vw, 4.8rem); }
+.accent-caveat { --lf-accent-font: 'Caveat', cursive; --lf-accent-size: clamp(1.7rem, 2.4vw, 2.2rem); --lf-accent-size-lg: clamp(2.3rem, 3.8vw, 3.4rem); }
+:is(.accent-allura, .accent-pinyon, .accent-sacramento, .accent-caveat) .lf-col :is(.lf-col-accent, .lf-col-handwritten) { font-family: var(--lf-accent-font) !important; font-style: normal; }
+
+/* Collage photo corners follow the Style's frame (the Polaroid print keeps its square paper) */
+.frame-rounded .lf-col:not(.lf-col-polaroid) .lf-col-ph, .frame-soft .lf-col:not(.lf-col-polaroid) .lf-col-ph { border-radius: var(--lf-frame); }
+.frame-arch .lf-col:not(.lf-col-polaroid) .lf-col-ph { border-radius: 10px; }
+.frame-soft .lf-col-card .lf-col-media .lf-col-ph, .frame-soft .lf-col-tiles .lf-col-ph { box-shadow: var(--lf-frame-shadow); }

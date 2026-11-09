@@ -1,0 +1,1106 @@
+﻿Handlebars.registerHelper("hbBytesToSize", function (bytes) {
+    return BytesToSize(bytes);
+});
+
+Handlebars.registerHelper("hbHtmlEscape", function (str) {
+    return HtmlEscape(str);
+});
+
+Handlebars.registerHelper("hbQueryString", function (i) {
+    return GetQueryString(i);
+});
+
+Handlebars.registerHelper("hbFormatJsonDate", function (date, shortYear) {
+    return FormatJsonDate(date, shortYear || false);
+});
+
+Handlebars.registerHelper("hbFormatJsonDateString", function (date) {
+    return FormatJsonDateString(date);
+});
+
+Handlebars.registerHelper("hbDecodeHtml", function (txt) {
+    return DecodeHtml(txt); 
+});
+
+Handlebars.registerHelper("hbLowerCase", function (txt) {
+    return (txt.toString() || '').toLowerCase();
+});
+
+Handlebars.registerHelper("hbFormatJsonTime", function (date) {
+    return FormatJsonTime(date);
+});
+
+Handlebars.registerHelper("hbFormatJsonDateTime", function (date) {
+    return FormatJsonDateTime(date);
+});
+
+Handlebars.registerHelper("hbFormatStartToEnd", function (s, e) {
+    return FormatStartToEnd(FormatJsonDateTime(s), FormatJsonDateTime(e));
+});
+
+Handlebars.registerHelper("hbFormatMilitaryTime", function (i) {
+    return FormatMilitaryTime(i);
+});
+
+Handlebars.registerHelper("hbFormatCurrency", function (amount) {
+    return FormatCurrency(amount);
+});
+
+Handlebars.registerHelper("hbFormatShortCurrency", function (amount) {
+    return FormatShortCurrency(amount);
+});
+
+Handlebars.registerHelper("hbCurrencySymbol", function (amount) {
+    return $('[id$="hfSymbol"]').val() || $('#MyCurrency').val();
+});
+
+Handlebars.registerHelper("hbFormatMoney", function (amount, y) {
+    return GetMoney(amount, y);
+});
+
+Handlebars.registerHelper("hbFormatMoneyCurrency", function (amount, y) {
+    return (amount < 0 ? '-' : '+') + ($('[id$="hfSymbol"]').val() || $('#MyCurrency').val()) + GetMoney(Math.abs(amount), y);
+});
+
+Handlebars.registerHelper("hbFormatQuantity", function (amount) {
+    return GetQuantity(amount);
+});
+
+Handlebars.registerHelper("hbFormatPhone", function (phone, countryCode) {
+    return FormatPhone(phone, countryCode);
+});
+
+Handlebars.registerHelper("hbFormatDecimal", function (value, digits) {
+    return FormatDecimal(value, digits);
+});
+
+Handlebars.registerHelper("hbStringifyNumber", function (num, lower) {
+    return StringifyNumber(num, lower);
+});
+
+
+Handlebars.registerHelper("hbMug", function (fileName) {
+    return GetCdnImagePath(fileName, true) + '?w=28';
+});
+
+Handlebars.registerHelper("hbCdnImagePath", function (fileName, cdn, f, useBase) {
+    return GetCdnImagePath(fileName,cdn,f,useBase);
+});
+
+Handlebars.registerHelper("hbDocumentCdnPath", function (fileName) {
+    return GetCdnImagePath(fileName, 'cdn11', false, false);
+});
+
+Handlebars.registerHelper("hbBlankZero", function (amount) {
+    if (amount == 0 || amount == 0.0)
+        return '';
+    else
+        return amount;
+});
+
+Handlebars.registerHelper("hbLightboxPath", function (data) {
+    return GetCdnImagePath(data.LatestFileName || data.FileName, 'cdn2'); // + '?w=400&quality=80';
+});
+
+Handlebars.registerHelper("hbFormatMinutesTime", function (t) {
+    return FormatMinutesTime(t, false);
+});
+
+Handlebars.registerHelper('if_even', function (conditional, options) {
+    if ((conditional % 2) == 0) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
+Handlebars.registerHelper('if_odd', function (conditional, options) {
+    if ((conditional % 2) != 0) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
+Handlebars.registerHelper('paginate', function (pagination, options) {
+    var type = options.hash.type || 'middle';
+    var ret = '';
+    var pageCount = Number(pagination.pageCount);
+    var page = Number(pagination.page);
+    var limit;
+    if (options.hash.limit) limit = +options.hash.limit;
+
+    //page pageCount
+    var newContext = {};
+    switch (type) {
+        case 'middle':
+            if (typeof limit === 'number') {
+                var i = 0;
+                var leftCount = Math.ceil(limit / 2) - 1;
+                var rightCount = limit - leftCount - 1;
+                if (page + rightCount > pageCount)
+                    leftCount = limit - (pageCount - page) - 1;
+                if (page - leftCount < 1)
+                    leftCount = page - 1;
+                var start = page - leftCount;
+
+                while (i < limit && i < pageCount) {
+                    newContext = { n: start };
+                    if (start === page) newContext.active = true;
+                    ret = ret + options.fn(newContext);
+                    start++;
+                    i++;
+                }
+            }
+            else {
+                for (var i = 1; i <= pageCount; i++) {
+                    newContext = { n: i };
+                    if (i === page) newContext.active = true;
+                    ret = ret + options.fn(newContext);
+                }
+            }
+            break;
+        case 'previous':
+            if (page === 1) {
+                newContext = { disabled: true, n: 1 }
+            }
+            else {
+                newContext = { n: page - 1 }
+            }
+            ret = ret + options.fn(newContext);
+            break;
+        case 'next':
+            newContext = {};
+            if (page === pageCount) {
+                newContext = { disabled: true, n: pageCount }
+            }
+            else {
+                newContext = { n: page + 1 }
+            }
+            ret = ret + options.fn(newContext);
+            break;
+        case 'first':
+            if (page === 1) {
+                newContext = { disabled: true, n: 1 }
+            }
+            else {
+                newContext = { n: 1 }
+            }
+            ret = ret + options.fn(newContext);
+            break;
+        case 'last':
+            if (page === pageCount) {
+                newContext = { disabled: true, n: pageCount }
+            }
+            else {
+                newContext = { n: pageCount }
+            }
+            ret = ret + options.fn(newContext);
+            break;
+    }
+
+    return ret;
+});
+
+Handlebars.registerHelper('compare', function (lvalue, operator, rvalue, options) {
+    var operators, result;
+
+    if (arguments.length < 3) {
+        throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
+    }
+
+    if (options === undefined) {
+        options = rvalue;
+        rvalue = operator;
+        operator = "===";
+    }
+
+    operators = {
+        '==': function (l, r) { return l == r; },
+        '===': function (l, r) { return l === r; },
+        '!=': function (l, r) { return l != r; },
+        '!==': function (l, r) { return l !== r; },
+        '<': function (l, r) { return l < r; },
+        '>': function (l, r) { return l > r; },
+        '<=': function (l, r) { return l <= r; },
+        '>=': function (l, r) { return l >= r; },
+        'typeof': function (l, r) { return typeof l == r; }
+    };
+
+    if (!operators[operator]) {
+        throw new Error("Handlerbars Helper 'compare' doesn't know the operator " + operator);
+    }
+
+    result = operators[operator](lvalue, rvalue);
+
+    if (result) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
+Handlebars.registerHelper("hbMath", function (lvalue, operator, rvalue, options) {
+    lvalue = parseFloat(lvalue);
+    rvalue = parseFloat(rvalue);
+
+    return {
+        "+": lvalue + rvalue,
+        "-": lvalue - rvalue,
+        "*": lvalue * rvalue,
+        "/": lvalue / rvalue,
+        "%": lvalue % rvalue
+    }[operator];
+});
+
+var rendered = Handlebars.compile(
+    '{{#each values}}' +
+    'i={{@index}}: ' +
+    'i+1 = {{hbMath @index "+" 1}}, ' +
+    'i-0.5 = {{hbMath @index "+" "-0.5"}}, ' +
+    'i/2 = {{hbMath @index "*" 2}}, ' +
+    'i%2 = {{hbMath @index "%" 2}}, ' +
+    'i*i = {{hbMath @index "*" @index}}\n' +
+    '{{/each}}'
+)({
+    values: ['a', 'b', 'c', 'd', 'e']
+});
+
+function selectOnUnselecting() {
+    $(this).data('unselecting', true);
+    $(this).empty().trigger('change');
+}
+
+function selectOnOpening(e) {
+    if ($(this).data('unselecting')) {
+        $(this).removeData('unselecting');
+        e.preventDefault();
+    }
+}
+
+function ShowPageSpinner(c) {
+    if (c) {
+        if (c.parent().hasClass('master-modal-spinner'))
+            c.parent().show();
+        else
+            c.show();
+    }
+    else
+        $('.master-modal-spinner').show();
+    var div = c || $('.page-spinner');
+    div.fadeIn();
+}
+
+function HidePageSpinner(c) {
+    //$('.master-modal-spinner').fadeOut(500);
+    $('.page-spinner').fadeOut(500);
+}
+
+
+function getCurrencySymbol() {
+    return $('[id$="hfSymbol"]').val() || $('#CurrencySymbol').val();
+}
+
+function getCurrencyCode() {
+    return $('[id$="hfCurrencyCode"]').val() || $('#CurrencyCode').val();
+}
+
+$(document).ready(function () {
+    function HtmlEscape(s) {
+        s = s || '';
+        return s.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/'/g, '&#039;')
+            .replace(/"/g, '&quot;')
+            .replace(/\r\n/g, '<br />')
+            .replace(/\n/g, '<br />');
+    }
+
+    Handlebars.registerHelper("hbCounter", function (i) {
+        return i + 1;
+    });
+
+    //Handlebars.registerHelper("hbHtmlEscape", function (str) {
+    //    return HtmlEscape(str);
+    //});
+
+    //Handlebars.registerHelper("hbFormatJsonDate", function (date) {
+    //    return FormatJsonDate(date);
+    //});
+
+    //Handlebars.registerHelper("hbFormatJsonTime", function (date) {
+    //    return FormatJsonTime(date);
+    //});
+
+    //Handlebars.registerHelper("hbFormatJsonDateTime", function (date) {
+    //    return FormatJsonDateTime(date);
+    //});
+
+    //Handlebars.registerHelper("hbFormatStartToEnd", function (s, e) {
+    //    return FormatStartToEnd(FormatJsonDateTime(s), FormatJsonDateTime(e));
+    //});
+
+    //Handlebars.registerHelper("hbFormatCurrency", function (amount) {
+    //    return FormatCurrency(amount);
+    //});
+
+    //Handlebars.registerHelper("hbFormatMoney", function (amount) {
+    //    return GetMoney(amount);
+    //});
+
+    //Handlebars.registerHelper("hbBlankZero", function (amount) {
+    //    if (amount == 0 || amount == 0.0)
+    //        return '';
+    //    else
+    //        return amount;
+    //});
+
+    //Handlebars.registerHelper("hbCdnImagePath", function (fileName) {
+    //    return GetCdnImagePath(fileName);
+    //});
+
+    //Handlebars.registerHelper('compare', function (lvalue, operator, rvalue, options) {
+    //    var operators, result;
+
+    //    if (arguments.length < 3) {
+    //        throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
+    //    }
+
+    //    if (options === undefined) {
+    //        options = rvalue;
+    //        rvalue = operator;
+    //        operator = "===";
+    //    }
+
+    //    operators = {
+    //        '==': function (l, r) { return l == r; },
+    //        '===': function (l, r) { return l === r; },
+    //        '!=': function (l, r) { return l != r; },
+    //        '!==': function (l, r) { return l !== r; },
+    //        '<': function (l, r) { return l < r; },
+    //        '>': function (l, r) { return l > r; },
+    //        '<=': function (l, r) { return l <= r; },
+    //        '>=': function (l, r) { return l >= r; },
+    //        'typeof': function (l, r) { return typeof l == r; }
+    //    };
+
+    //    if (!operators[operator]) {
+    //        throw new Error("Handlerbars Helper 'compare' doesn't know the operator " + operator);
+    //    }
+
+    //    result = operators[operator](lvalue, rvalue);
+
+    //    if (result) {
+    //        return options.fn(this);
+    //    } else {
+    //        return options.inverse(this);
+    //    }
+    //});
+
+    setNavActive();
+});
+
+function CallPortal(thisUrl, thisData, successCallback, errorCallback) {
+    CallAjax(thisUrl, thisData, successCallback, errorCallback, 'PortalServices');
+}
+
+// Safely turn an .asmx response value into an object.
+// jQuery already parses the response (dataType:"json"), so calling
+// $.parseJSON again throws when the value is empty ("") or already an object.
+function parseAjaxPayload(x) {
+    if (x == null) return null;
+    if (typeof x === 'object') return x;       // already parsed by jQuery
+    if (typeof x === 'string') {
+        if (x === '') return null;             // empty .d -> null instead of throwing
+        try { return JSON.parse(x); } catch (e) { return x; }
+    }
+    return x;
+}
+
+
+// Load an .aspx fragment into a container and run its init function afterwards.
+// The init function is defined by an inline <script> inside the fragment, so it
+// only exists on window after a successful load — hence initName as a string.
+// jQuery fires the .load() callback even on failure (Cloudflare block, network
+// drop, navigate-away abort), so guard, retry once, then report to Sentry.
+function loadFragment($container, url, initName, attempt) {
+    attempt = attempt || 1;
+    $container.load(url, function (responseText, textStatus) {
+        var init = window[initName];
+        if (textStatus === 'error' || typeof init !== 'function') {
+            $container.html('');
+            if (attempt < 2)
+                setTimeout(function () { loadFragment($container, url, initName, attempt + 1); }, 2000);
+            else if (typeof Sentry !== 'undefined' && Sentry.captureMessage)
+                Sentry.captureMessage('loadFragment failed: ' + url + ' | script load errors: ' + JSON.stringify(window.__scriptLoadErrors || []));
+            return;
+        }
+        init();
+    });
+}
+
+function CallAjax(thisUrl, thisData, successCallback, errorCallback, asmx) {
+    if (thisData == '')
+        thisData = '{}';
+    else {
+        thisData = JSON.stringify(thisData);
+    }
+
+    asmx = asmx || 'PublicServices'
+
+    thisUrl = '/' + asmx + '.asmx/' + thisUrl;
+
+    $.ajax({
+        url: thisUrl,
+        data: thisData,
+        dataType: "json",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (msg) {
+            var payload = (msg && msg.d !== undefined) ? msg.d : msg;
+            successCallback(parseAjaxPayload(payload));
+        },
+        error: function (xhr, textStatus, thrownError) {
+            if(Ladda)
+                Ladda.stopAll();
+
+            if (typeof HidePageSpinner === 'function')
+                HidePageSpinner();
+
+            if (xhr.aborted || textStatus == 'abort' || xhr.status == 0 || xhr.readyState == 0) {
+                //ignore aborts
+                //console.log('ignore abort');
+            }
+            else {
+                if (errorCallback) {
+                    NotifyError(xhr, thisUrl, thisData);
+                    errorCallback(xhr);
+                }
+                else {
+                    NotifyError(xhr, thisUrl, thisData);
+                    //alert(xhr.status);
+                }
+            }            
+        }
+    });
+}
+
+function NotifyError(err, thisUrl, thisData) {
+    var message = 'JS error';
+
+    if (err.responseText) {
+        try {
+            message = ($.parseJSON(err.responseText) || {}).Message || JSON.stringify(err.responseText);
+        }
+        catch (e) {
+            // non-JSON response (HTML/plain-text error page) — log a truncated excerpt
+            message = (err.statusText ? err.statusText + ': ' : '') + err.responseText.substring(0, 500);
+        }
+    }
+    else if (err.statusText)
+        message = err.statusText;
+    else if (err.get_message)
+        message = err.get_message();   
+
+    if (err !== null) {
+        message += ' url: ' + thisUrl + ', data: ' + JSON.stringify(thisData) + ', status: ' + err.status;
+        message = message.substring(0, 2000); //giant payloads blow past IIS's 2KB query string limit (404.15) as GET, and bloat the error email as POST
+        $.post("/api/ExternalServices/LogJsError/", { 'message': message, 'url': window.location.href }); //POST body avoids the query string length limit
+    }
+}
+
+function ValidateFileUpload(data, acceptFileTypes, maxFileSize) {
+    var uploadErrors = [];
+
+    //console.log(data.originalFiles[0].name);
+    //if (data.originalFiles[0]['type'].length && acceptFileTypes != undefined && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+    if (data.originalFiles[0].name && acceptFileTypes != undefined && !acceptFileTypes.test(data.originalFiles[0].name)) {
+        uploadErrors.push('File type ' + data.originalFiles[0]['type'] + ' is not an accepted file type');
+    }
+    if (data.originalFiles[0]['size'] && maxFileSize != undefined && data.originalFiles[0]['size'] > maxFileSize) {
+        uploadErrors.push('File ' + data.originalFiles[0]['name'] + ' exceeds ' + BytesToSize(maxFileSize) + ' maximum');
+    }
+    if (uploadErrors.length > 0) {
+        for (i = 0; i < uploadErrors.length; i++)
+            toastr.error(uploadErrors[i]);
+    } else {
+        toastr.clear();
+        data.submit();
+    }
+}
+
+function FormValidator(msgs, rules, s) {
+    var selector = 'form';
+    if (s != null) {
+        selector = s;
+    }
+    return $(selector).validate({
+        rules: rules
+        , ignore: ':hidden, [contenteditable]' //rich-text editors (Quill) have no name; validating them throws in escapeCssMeta
+        , messages: msgs
+        , errorPlacement: function (error, element) {
+            if (element.closest('.rw').find('.errMsg').length == 0) {
+                element.closest('.rw').append('<div class="errMsg"></div>');
+            }
+            error.appendTo(element.closest('.rw').find('.errMsg'));
+        }
+        , highlight: function (element, errorClass) {
+            $(element).closest('.rw').addClass('invalid').find('.errMsg').show();
+            $(element).addClass('errorRed');
+        }
+        , unhighlight: function (element, errorClass) {
+            $(element).closest('.rw').removeClass('invalid').find('.errMsg').hide();
+            $(element).removeClass('errorRed');
+        }
+    });
+}
+
+$.validator.methods.date = function (value, element, param) {
+    return this.optional(element) || moment(value, $('[id$="hfDateFormat"]').val()).isValid();
+}
+
+$.validator.addMethod("timeAmPm", function (value, element) {
+    return this.optional(element) || /^(0?[1-9]|1[012])(:[0-5]\d)\s?[APap][mM]$/.test(value);
+}, "Invalid time format.");
+
+$.fn.createValidator = function (msgs, rules, groups, ignore) {                                             // copy to public
+    var objValidator;
+
+    if ($('#fValidateMe').length > 0) {
+        $('#fValidateMe').contents().unwrap();  //remove any preexisting
+    }
+
+    if (ignore == null || ignore == undefined || ignore === '' || ($.isArray(ignore) && ignore.length == 0))
+        ignore = '[contenteditable]'; //rich-text editors (Quill) have no name; validating them throws in escapeCssMeta
+    else if (typeof ignore === 'string')
+        ignore += ', [contenteditable]';
+
+    //$(this).find('.errMsg').html(''); //reset
+    $(this).wrap('<form id="fValidateMe" />');
+    objValidator = $("#fValidateMe").validate({
+        rules: rules
+        , ignore: ignore
+        , messages: msgs
+        , errorPlacement: function (error, element) {
+            var errorHolder = $(element).closest('.form-group');
+
+            if (errorHolder && errorHolder.length == 0)
+                errorHolder = $(element).closest('.rw,.form-group-container');
+
+            if (errorHolder.find('.errMsg').length == 0) {
+                if (errorHolder.prop('tagName') == 'TBODY')
+                    errorHolder.append('<tr><td colspan="99" class="errMsg"></td></tr>');
+                else 
+                    errorHolder.append('<div class="errMsg"></div>');
+            }
+            else
+                errorHolder.find('.errMsg').html(''); //reset (this is newly added
+
+            error.appendTo(errorHolder.find('.errMsg'));
+        }
+        , highlight: function (element, errorClass) {
+            $(element).closest('.rw').addClass('invalid').find('.errMsg').show();
+            $(element).addClass('errorRed');
+        }
+        , unhighlight: function (element, errorClass) {
+            var errorHolder = $(element).closest('.form-group');
+
+            if (errorHolder && errorHolder.length == 0)
+                errorHolder = $(element).closest('.rw');
+
+            $(element).closest('.rw').removeClass('invalid');
+
+            errorHolder.find('.errMsg label').remove();
+            //errorHolder.find('.error[for="' + $(element).prop('id') + '"]').html('');
+            $(element).removeClass('errorRed');
+        }
+        , groups: groups
+    });                                                                          //.form();
+
+    return objValidator;
+}
+
+function RunValidation(v) {
+    v.reset(); //reset
+    var bValid = v.form(); //v: jquery validate object
+
+    if (bValid) {
+        $('#fValidateMe').contents().unwrap(); //only remove if valid; otherwise interferes with validation
+    }
+
+    return bValid;
+}
+
+function ConvertToTimespan(v) { 
+    if (v) {
+        console.log('v', v);
+        var meridiem = '';
+        if (v.endsWith('am'))
+            meridiem = 'am';
+        else if (v.endsWith('pm'))
+            meridiem = 'pm';
+
+        v = v.replace('am', '').replace('pm', '');
+        var colonIndex = v.indexOf(':');
+        var h = GetInteger(v.substring(0, colonIndex));
+        var m = v.substring(colonIndex + 1);
+
+        if (meridiem == 'am' && h == 12)
+            h = 0;
+
+        v = h + (meridiem == 'pm' && h != 12 ? 12 : 0) + ':' + m;
+        console.log('v', v);
+        return v;
+    }
+    else
+        return 0;
+}
+
+
+function DecodeHtml(html) {
+    if (html == null)
+        return null;
+
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+}
+
+function setNavActive() {
+    var folders = location.pathname.toLowerCase().substring(1).split('/');
+
+
+    switch (folders[2]) {
+        case 'home':
+            $('#liNavHome').addClass('active');
+            break;
+        case 'quotes':
+            $('#liNavQuotes').addClass('active');
+            break;
+        case 'invoices':
+            $('#liNavInvoices').addClass('active');
+            break;
+        case 'galleries':
+            $('#liNavCollections').addClass('active');
+            break;
+        case 'pricing':
+            $('#liNavPricing').addClass('active');
+            break;
+        case 'esign':
+        case 'contracts':
+            $('#liNavContracts, #liNavDocuments').addClass('active');
+            break;
+        
+        case 'forms':
+            $('#liNavForms').addClass('active');
+            break;
+        case 'messages':
+            $('#liNavMessages').addClass('active');
+            break;
+
+        default:
+            $('#liNavHome').addClass('active');
+    }
+}
+
+function GetSlug() {
+    var parts = window.location.pathname
+        .split("/")
+        .filter(function (part) {
+            return part.length > 0;
+        });
+
+    return parts.length ? parts[parts.length - 1] : null;
+}
+
+function GetQueryString(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    var value = '';
+
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+            if (pair[1] != 'undefined') {
+                value = pair[1];
+            }
+        }
+    }
+
+    return value;
+}
+
+function GetQueryVal(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    var value = '';
+
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+            if (pair[1] != 'undefined') {
+                value = pair[1];
+            }
+        }
+    }
+
+    var num = parseInt(value) || 0;
+    return num;
+}
+
+function GetString(x) {
+    return (x || '');
+}
+
+function GetInteger(x) {
+    x = x || ''; //in case null    
+    x = x + ''; //convert to a string
+
+    x = x.replace(/,/g, "").replace(/$/g, "");
+    return parseInt(x) || 0;
+}
+
+function RoundTwo(x) { //returns a number
+    x = parseFloat(x) || 0;
+    var val = Math.round((x + Number.EPSILON) * 100) / 100;
+    //console.log('RoundTwo', val);
+    return val;
+}
+
+function GetDecimal(x) {
+    x = x || ''; //in case null    
+    x = x + ''; //convert to a string
+
+    x = x.replace(/,/g, "").replace(/$/g, "");
+    return parseFloat(x) || 0.0;
+}
+
+//10/2026 decimals for money: the y argument, else the page's CurrencyMinorUnits (set it for JPY = 0, KWD = 3), else 2.
+//GetMoney used parseInt(y) || 2, so 0 decimals was impossible
+function MoneyDecimals(y) {
+    var decimals = parseInt(y, 10);
+    if (isNaN(decimals))
+        decimals = (typeof CurrencyMinorUnits === 'number' ? CurrencyMinorUnits : 2);
+    return decimals;
+}
+
+function GetMoney(x, y) { //returns a string
+    x = x || '';
+    var ret = x.toString().replace(/[^0-9\-\.]+/g, ''); //remove non numeric or non decimal
+    ret = (parseFloat(ret) || 0).toFixed(MoneyDecimals(y));
+    if (ret.indexOf('.') == 0)
+        ret = '0' + ret;
+    return ret;
+}
+
+function GetQuantity(x) { //returns a string
+    x = x || '';
+    var ret = x.toString().replace(/[^0-9\-\.]+/g, ''); //remove non numeric or non decimal
+
+    if (x % 1 == 0)
+        return x;
+    else
+        return (parseFloat(ret) || 0).toFixed(2);
+}
+
+function GetThumbCdnImagePath(fileName) {
+    return 'https://cdn4.lightfolio.com/' + $('#MyPublicFolder').val() + '/' + fileName;
+}
+
+function GetCdnImagePath(fileName, cdn, f, useBase) { // 'f' removed
+    return 'https://' + (cdn || 'cdn5') + '.' + (typeof AppDomain === 'undefined' ? 'lightfolio.com' : AppDomain) + '/' + (f ? 'f/' : '') + (useBase ? '79b1273e-df6f-414c-96a4-85810b705d55' : $('#MyPublicFolder').val()) + '/' + fileName;
+}
+
+function FormatCurrency(amount, decimals) {
+    if (amount == null)
+        return '';
+
+    //10/2026 group the whole part only -- the old regex needed a "." to group at all (no commas for 0-decimal amounts)
+    var parts = GetMoney(amount, decimals).toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
+}
+
+function FormatMilitaryTime(t) {
+    if (t == null)
+        return '';
+
+    var m = ' am';
+
+    if (t >= 1200)
+        m = ' pm';
+
+    var f = (t >= 1300 ? (t - 1200) : t).toString();
+
+    if (f.length < 2)
+        f = '12:0' + f;
+    else if (f.length < 3)
+        f = '12:' + f;
+    else if (f.length == 3)
+        f = f.substring(0, 1) + ':' + f.substring(1);
+    else
+        f = f.substring(0, 2) + ':' + f.substring(2);
+
+    return f + m;
+}
+
+function FormatMinutesTime(t, mt) {
+    if (t == null)
+        return '';
+
+    if (t == -1)
+        return '';
+
+    if (mt) { //military time
+        var hours = Math.floor(t / 60); // (Math.floor(t / 60) <= 12 ? Math.floor(t / 60) : Math.floor(t / 60) - 12);
+        var minutes = ((t % 60) > 9 ? (t % 60) : '0' + (t % 60));
+
+        return hours + ':' + minutes;
+    }
+    else {
+        var m = ' am';
+
+        if (t >= 720)
+            m = ' pm';
+
+        var hours = (Math.floor(t / 60) <= 12 ? Math.floor(t / 60) : Math.floor(t / 60) - 12);
+        var minutes = ((t % 60) > 9 ? (t % 60) : '0' + (t % 60));
+        var f = hours + ':' + minutes;
+
+        return f + m;
+    }
+}
+
+function DateData(x, formatJsonDate) {
+    if (!x || x == '')
+        return '';
+    else {
+        if (formatJsonDate == true)
+            x = FormatJsonDate(x);
+
+        x = x.replace(/\./g, '/');
+
+        switch ($('[id$="hfDateFormat"]').val()) {
+            case 'MM/DD/YYYY':
+                return x;
+            case 'DD/MM/YYYY':
+            case 'DD.MM.YYYY':
+            case 'DD-MM-YYYY':
+                return moment(x, 'DD/MM/YYYY').format('MM/DD/YYYY');
+            default:
+                return x;
+        }
+    }
+}
+
+function BytesToSize(bytes) {
+    if (bytes == '' || bytes == undefined || bytes == null) return '0 Byte';
+    if (bytes == 0) return '0'; //Byte
+    var k = 1024;
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    var i = Math.floor(Math.log(bytes) / Math.log(k));
+    return (bytes / Math.pow(k, i)).toFixed(1) + ' ' + sizes[i];
+    //if (bytes < 1024) return bytes + " Bytes";
+    //else if (bytes < 1048576) return (bytes / 1024).toFixed(3) + " KB";
+    //else if (bytes < 1073741824) return (bytes / 1048576).toFixed(3) + " MB";
+    //else return (bytes / 1073741824).toFixed(3) + " GB";
+}
+
+$.fn.clearForm = function () {
+    //clear validatiors
+    $(this).find('.invalid').removeClass('invalid');
+    $(this).find('.errMsg').remove();
+
+    return this.find('input, select, textarea').each(function () {
+        var type = this.type, tag = this.tagName.toLowerCase();
+
+        if (tag == 'form')
+            return $(':input', this).clearForm();
+        if (type == 'text' || type == 'password' || tag == 'textarea')
+            this.value = '';
+        else if (type == 'checkbox' || type == 'radio')
+            this.checked = false;
+        else if (tag == 'select') {
+            this.selectedIndex = 0;
+        }
+    });
+};
+
+function clearSearch() {
+    $('.tableFilter').find('input').val('');
+    $('.tableFilter').find('select').prop('selectedIndex', 0);
+}
+
+function HtmlEscape(s) {
+    return s.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/'/g, '&#039;')
+		.replace(/"/g, '&quot;')
+		.replace(/\n/g, '<br />');
+}
+
+function HtmlUnescape(s) {
+    s = s || '';
+    return s
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+}
+
+function countryFormatResult(obj) {
+    return obj.CountryName;
+}
+
+function countryFormatSelection(obj) {
+    return obj.CountryName;
+}
+
+function stateCodeFormatResult(obj) {
+    return obj.StateName;
+}
+
+function stateCodeFormatSelection(obj) {
+    return obj.StateCode;
+}
+
+
+
+function GetToday() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+
+    var yyyy = today.getFullYear();
+    if (dd < 10) { dd = '0' + dd }
+    if (mm < 10) { mm = '0' + mm }
+    var today = mm + '/' + dd + '/' + yyyy;
+    return today;
+}
+
+function FormatJsonDateString(jsonDt) {
+    FormatJsonDate(jsonDt, false, 'MMM D, YYYY');
+}
+
+function FormatJsonDate(jsonDt, shortYear, fmt) {
+    var dateString;
+
+    if (jsonDt == null || jsonDt == undefined || jsonDt == '') {  // || jsonDt == '/Date(-62135596800000)/') { --deprecated. using ISO dates
+        dateString = '';
+    }
+    else {
+        if (shortYear == undefined) {
+            shortYear = false;
+        }
+
+        var m = moment(jsonDt);
+        if (m.year() == 0 || m.year() == 1) {
+            dateString = '';
+        }
+        else {
+            var format = fmt || $('[id$="hfDateFormat"]').val() || 'MM/DD/YYYY';
+            format = shortYear ? format.replace('YYYY', 'YY') : format;
+            dateString = m.format(format);
+        }
+    }
+
+    return dateString;
+}
+
+function FormatJsonDateTime(dtTime) {
+    var dateString = FormatJsonDate(dtTime);
+    var timeString = FormatJsonTime(dtTime);
+
+    return dateString + ' ' + timeString;
+}
+
+function FormatStartToEnd(start, end) {
+    var format = $('[id$="hfDateFormat"]').val() || 'MM/DD/YYYY';
+
+    var s = moment(start, format + ' hh:mm A');
+    var e = moment(end, format + ' hh:mm A');
+
+    var to = (s.format(format) == e.format(format) ? e.format('h:mm A') : e.format(format + ' h:mm A'));
+    if (e.format('YYYY') == '0000' || to == 'Invalid date')
+        to = '?';
+
+    var ret = s.format(format + ' h:mm A') + ' - ' + to;
+    ret = (s.isValid() ? ret : '');
+    return ret;
+}
+
+function GetJsonDateTime(dtTime) {
+    var dateString = FormatJsonDate(dtTime);
+    var timeString = FormatJsonTime(dtTime);
+
+    return new Date(dateString + ' ' + timeString);
+}
+
+function FormatJsonTime(jsonDt) {
+    var dateString;
+
+    if (jsonDt == null || jsonDt == undefined) { // || jsonDt == '/Date(-62135596800000)/') { --deprecated. using ISO dates
+        dateString = '';
+    }
+    else {
+        var m = moment(jsonDt);
+        if (m.year() == 0)
+            dateString = '';
+        else if (m.hour() == 0 && m.minute() == 0)
+            dateString = '';
+        else
+            dateString = m.format("hh:mm A");
+    }
+
+    return dateString;
+}
+
+function selectCountryCode(c, v) {
+    var toggle = $(c).closest('.drop-toggle-control');
+    toggle.find('input:hidden').val(v);
+    toggle.find('.dropdown-toggle').html('+' + v + ' <i class="fa fa-angle-down"></i>');
+}
+
+function aIndexOf(a, fnc) {
+    if (!fnc || typeof (fnc) != 'function') {
+        return -1;
+    }
+    if (!a || !a.length || a.length < 1) return -1;
+    for (var i = 0; i < a.length; i++) {
+        if (fnc(a[i])) return i;
+    }
+    return -1;
+}
+
+function arrayIndexOf(a, f, v) {
+    var i = aIndexOf(a, function (obj) {
+        if (obj[f] != undefined) {
+            return obj[f] == v;
+        }
+        else {
+            return false;
+        }
+    });
+    return i;
+}
+
+//extend datatables to maintain paging/sorting
+if ($.fn.dataTableExt) {
+    $.fn.dataTableExt.oApi.fnStandingRedraw = function (oSettings) {
+        if (oSettings.oFeatures.bServerSide === false) {
+            var before = oSettings._iDisplayStart;
+
+            oSettings.oApi._fnReDraw(oSettings);
+
+            // <a href="/ref#iDisplayStart">iDisplayStart</a> has been reset to zero - so lets change it back
+            oSettings._iDisplayStart = before;
+            oSettings.oApi._fnCalculateEnd(oSettings);
+        }
+
+        // draw the 'current' page
+        oSettings.oApi._fnDraw(oSettings);
+    };
+}

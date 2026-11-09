@@ -1,0 +1,4 @@
+﻿
+.mxb-wrapper.form-layout-left, .mxb-wrapper.form-layout-right { position: relative !important; }
+.mxb-wrapper.form-layout-left .mxb-form, .mxb-wrapper.form-layout-right .mxb-form { width: 100% !important; overflow-y: auto !important; }
+.mxb-wrapper.form-layout-left .mxb-form-background, .mxb-wrapper.form-layout-right .mxb-form-background { overflow-y: auto !important; }
